@@ -1,0 +1,9 @@
+Para iniciar el Proyecto:
+1.- Clonar Repositorio de GitHUB
+2.- Configurar el .env
+3.- Composer install
+4.- npm install
+5.- npm run dev
+6.- php artisan key:generate
+7.- php artisan migrate
+8.- composer require livewire/livewire
