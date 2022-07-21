@@ -14,8 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+return view('web.home');
 });
+
+Route::get('/perfil', function () {
+    return view('web.perfil');
+    });
+    
 
 Auth::routes();
 
