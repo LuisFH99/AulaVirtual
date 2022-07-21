@@ -24,13 +24,21 @@
             <li class="dropdown">
               <a class="nav-link navbar-brand perfil dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
                <img src="{{ asset('img/user.svg') }}" alt="" width="45" height="45" class="d-inline-block">
-               YANETH MARIZO
+               {{ Auth::user()->name}}
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="width: 100%">
                 <li><a class="dropdown-item" href="#">Action</a></li>
                 <li><a class="dropdown-item" href="#">Another action</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                <li>
+                    <a class="dropdown-item" href="{{ route('logout') }}"
+                       onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                       <i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión 
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                </li>
               </ul>
             </li>
           </ul>

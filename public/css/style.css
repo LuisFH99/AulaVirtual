@@ -1,11 +1,17 @@
-
+:root{
+    --primary:#2d529f;
+    --secondary:#007AF3;
+    --white:#fff;
+    --text-font: 16px;
+}
 
 .navbar {
-    background: #2d529f;
+    background: var(--primary);
     display: flex;
-    justify-content: space-between !important;
-    align-items: center !important;
-    padding: 5px 10% !important;
+    /* justify-content: space-between !important; */
+    /* align-items: center !important; */
+    padding: 5px 10%;
+    align-items: flex-end;
 }
 
 .navbar-nav {
@@ -20,21 +26,20 @@
     margin: 0px 200px 0px 0px !important;
 } */
  .nav-link{
-    color: white !important;
-    margin: 0px 0px 0px 30px !important;
-    justify-content: center !important;
+    color:var(--white) !important;
+    margin: 0px 0px 0px 30px;
     font-family: font-semibold;
-    font-size: 16px !important;
+    font-size: var(--text-font) ;
 } 
 
 .nav-item .nav-link::after{
-    content: "" !important;
-    height: 3px !important;
-    width: 0 !important;
+    content: "" ;
+    height: 3px ;
+    width: 0 ;
     left: 50%;
-    background-color: white !important;
-    display: block !important;
-    transition: 500ms ease-out !important;
+    background-color: var(--white) ;
+    display: block ;
+    transition: 500ms ease-out ;
 }
 
 .nav-item .nav-link:hover::after{
@@ -43,17 +48,26 @@
 
 .perfil{
     padding-left: 5%;
-    font-size: 16px;
+    font-size: var(--text-font);
     font-family: font-semibold;
 }
 
 ul li p{
-    color: #007AF3  !important;
+    color: var(--secondary)  !important;
 }
 
-
-
 .footer{
-    background: #2d529f !important;
+    background: var(--primary) !important;
     font-weight: bold;
+}
+
+.btn-primario{
+    background-color: var(--secondary);
+    color: var(--white);
+}
+
+.btn-primario:hover{
+    background-color: var(--primary);
+    color: var(--white);
+    font-weight: lighter;
 }
