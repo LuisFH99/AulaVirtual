@@ -17,10 +17,8 @@ Route::get('/', function () {
 return view('auth.login');
 });
 
-Route::get('/perfil', function () {
-    return view('web.perfil');
-    });
-    
+Route::get('/perfil', function () {return view('web.perfil');});
+Route::get('/cursos', [App\Http\Controllers\PageController::class, 'categorias'])->name('categorias');
 
 Auth::routes();
 

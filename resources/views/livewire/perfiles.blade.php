@@ -5,7 +5,7 @@
             <div class="image">
                 @if ($u->image !=null)
                     <img class="img-fluid" style="width:100%; height::100%" src="{{ asset('storage/img/'.$u->image) }}">
-                    <h6 class="text-center fw-bold text-primary" wire:loading  wire:target="image">Subiendo Foto....</h6>
+                    <h6 class="text-center fw-bold text-primary mt-2" wire:loading  wire:target="image">*Subiendo Foto....</h6>
                 @else
                     <img src="{{ asset('img/user.svg') }}" alt="Perfil">
                 @endif

@@ -3,6 +3,9 @@
     --secondary:#007AF3;
     --white:#fff;
     --text-font: 16px;
+    --text-font-lg: 18px;
+    --text-font-sm: 12px;
+    --text-type:font-semibold;
 }
 
 .navbar {
@@ -28,7 +31,7 @@
  .nav-link{
     color:var(--white) !important;
     margin: 0px 0px 0px 30px;
-    font-family: font-semibold;
+    font-family: var(--text-type);
     font-size: var(--text-font) ;
 } 
 
@@ -70,4 +73,30 @@ ul li p{
     background-color: var(--primary);
     color: var(--white);
     font-weight: lighter;
+}
+
+.btn-card{
+    margin-top: 2px;
+    color: var(--primary);
+    font-weight: normal;
+    font-family: var(--text-type);
+    border-radius: 40px;
+    width: 120px;
+    background-color: var(--white);
+    border: 1px solid var(--primary);
+}
+
+.btn-card:hover{
+    color: var(--white);
+    font-weight: bold;
+    border-radius: 40px;
+    width: 120px;
+    font-family: var(--text-type);
+    background-color: var(--primary);
+}
+
+.card-text{
+    color: var(--primary) !important;
+    font-size: var(--text-font-lg);
+    font-family: var(--text-type);
 }
