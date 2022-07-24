@@ -24,8 +24,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/perfil', function () {return view('web.perfil');});
-    Route::get('/cursos',  function () {return view('web.cursos');});
+    Route::view('/cursos', 'livewire.cursos.index')->name('curso.index');
+    //Route::get('/perfil', function () {return view('web.perfil');});
+    //Route::get('/cursos',  function () {return view('web.cursos');});
 });
 
 

@@ -11,7 +11,7 @@ class Curso extends Model{
     protected $fillable = ['nombre', 'descripcion', 'categoria_id'];
     public $timestamps = false;
 
-    public function categorias(){
-        return $this->belongsTo(Categoria::class);
+    public function categoria(){
+        return $this->belongsTo(Categoria::class,'categoria_id','id');
     }
 }

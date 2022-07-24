@@ -11,7 +11,9 @@
             <div class="contentido sombrita">
                 <h2><a href="/" class="text-decoration-none card-text">Análisis de datos con Power BI</a></h2>
                 <div class="estudiantes">
-                    <i class="fa-solid fa-user-group" style="color: #1C3D5E"></i>&nbsp;&nbsp;&nbsp;<p>57 Estudiantes</p>
+                    <img src="https://aula.enppeduca.com/images/icon-estudiantes.png" alt="">
+                    <p>57 Estudiantes</p>
+                    {{-- <i class="fa-solid fa-user-group" style="color: #1C3D5E"></i>&nbsp;&nbsp;&nbsp; --}}
                 </div>
                 <div class="certificciones">
                     <img src="https://aula.enppeduca.com/images/icon-certificacion.png" alt=""><p>Certificación <span> 220 horas académicas</span></p>
