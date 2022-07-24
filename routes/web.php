@@ -19,15 +19,13 @@ Route::get('/', function () {
 
 
 
+
+
 Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/perfil', function () {
-        return view('web.perfil');
-    });
-    Route::get('/cursos', function () {
-        return view('web.cursos');
-    })->name('cursos');
+    Route::get('/perfil', function () {return view('web.perfil');});
+    Route::get('/cursos',  function () {return view('web.cursos');});
 });
 
 
