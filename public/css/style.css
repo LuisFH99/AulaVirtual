@@ -98,6 +98,18 @@ ul li p{
     border: 1px solid var(--primary);
 }
 
+a .btn-card{
+    margin-top: 2px;
+    color: var(--primary);
+    font-weight: normal;
+    font-family: var(--text-type);
+    border-radius: 40px;
+    width: 120px;
+    background-color: var(--white);
+    border: 1px solid var(--primary);
+    text-decoration: none;
+}
+
 .btn-card:hover{
     color: var(--white);
     font-weight: bold;
