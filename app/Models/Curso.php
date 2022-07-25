@@ -5,13 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Curso extends Model{
+class Curso extends Model
+{
     use HasFactory;
     protected $table = 'cursos';
-    protected $fillable = ['nombre', 'descripcion', 'categoria_id'];
+    protected $fillable = [
+        'nombre',
+        'descripcion',
+        'subdescripcion',
+        'categoria_id'
+    ];
     public $timestamps = false;
 
-    public function categoria(){
-        return $this->belongsTo(Categoria::class,'categoria_id','id');
+    public function categoria()
+    {
+        return $this->belongsTo(Categoria::class, 'categoria_id', 'id');
     }
 }

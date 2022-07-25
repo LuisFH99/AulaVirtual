@@ -19,4 +19,9 @@ class Docente extends Model
     {
         return $this->belongsTo(Persona::class,'persona_id','id');
     }
+
+    public function docentepublicacion()
+    {
+        return $this->belongsToMany(Publicacion::class, 'docente_publicacion','publicacion_id','docentes_id');
+    }
 }

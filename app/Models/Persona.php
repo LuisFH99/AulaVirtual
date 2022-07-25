@@ -11,9 +11,8 @@ class Persona extends Model
     protected $table = 'personas';
     protected $fillable = [
         'dni',
-        'nombre',
-        'apep',
-        'apem',
+        'nombres',
+        'apellidos',
         'correo',
         'fechNac',
         'celular',
@@ -23,6 +22,6 @@ class Persona extends Model
 
 
     public function fullName(){
-        return "{$this->apep} {$this->apem} {$this->nombre}" ;
+        return "{$this->apellidos} {$this->nombres}" ;
     }
 }

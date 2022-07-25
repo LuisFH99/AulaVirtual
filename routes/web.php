@@ -24,8 +24,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
-    Route::view('/cursos', 'livewire.cursos.index')->name('curso.index');
+    
     Route::get('/perfil', function () {return view('web.perfil');});
+    Route::view('/cursos', 'livewire.cursos.index')->name('curso.index');
+    Route::view('/curso/{idpublicacion}', 'livewire.detallecurso.index')->name('detallecurso.index');
     //Route::get('/cursos',  function () {return view('web.cursos');});
 
     Route::view('/gestion/estudiantes', 'livewire.admin.estudiantes.index')->name('admin.estudiantes.index');

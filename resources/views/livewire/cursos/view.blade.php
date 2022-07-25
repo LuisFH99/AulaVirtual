@@ -18,7 +18,8 @@
                 <div class="cursos_ col-md-9">
                     <div class="row">
                         <div class="col-12 col-md-12">
-                            <h2 class="todos_tit">{{ $aux == 0 ? 'Todos tus Cursos':('Tus Cursos de la Categoria: '.$aux)}} </h2>
+                            <h2 class="todos_tit">
+                                {{ $aux == 0 ? 'Todos tus Cursos' : 'Tus Cursos de la Categoria: ' . $aux }} </h2>
                         </div>
                         @foreach ($allmatriculauser as $matriculauser)
                             @if ($aux == 0)
@@ -26,7 +27,7 @@
                                     <div class="mi_curso__">
                                         <div class="imagen">
                                             <a href="/">
-                                                <img src="{{ $matriculauser->publicacion->ruta_img }}" alt="">
+                                                <img src="{{ $matriculauser->publicacion->rutaimg }}" alt="">
                                             </a>
                                         </div>
                                         <div class="contentido sombrita">
@@ -46,7 +47,7 @@
                                                 <p>Certificación <span> {{ $matriculauser->publicacion->horas }} horas
                                                         académicas</span></p>
                                             </div>
-                                            <div class="boton"><a href="/" class="btn btn-card">Ver Curso</a>
+                                            <div class="boton"><a href="{{route('detallecurso.index',$matriculauser->publicacion->id)}}" class="btn btn-card">Ver Curso</a>
                                             </div>
                                         </div>
                                     </div>
@@ -56,7 +57,7 @@
                                     <div class="mi_curso__">
                                         <div class="imagen">
                                             <a href="/">
-                                                <img src="{{ $matriculauser->publicacion->ruta_img }}" alt="">
+                                                <img src="{{ $matriculauser->publicacion->rutaimg }}" alt="">
                                             </a>
                                         </div>
                                         <div class="contentido sombrita">
@@ -76,17 +77,13 @@
                                                 <p>Certificación <span> {{ $matriculauser->publicacion->horas }} horas
                                                         académicas</span></p>
                                             </div>
-                                            <div class="boton"><a href="/" class="btn btn-card">Ver Curso</a>
+                                            <div class="boton"><a href="{{route('detallecurso.index',$matriculauser->publicacion->id)}}" class="btn btn-card">Ver Curso</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             @endif
                         @endforeach
-                        <div class="col-6 col-md-4 mi_curso_">
-
-
-                        </div>
                     </div>
                 </div>
             </div>
