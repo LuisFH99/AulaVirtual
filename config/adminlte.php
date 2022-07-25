@@ -249,8 +249,22 @@ return [
         ],
         [
             'text' => 'Docentes',
-            //'route'  => '',
+            'route'  => 'admin.docentes.index',
             'icon' => 'nav-icon fas fa-chalkboard-teacher',
+        ],
+
+        [
+            'text' => 'Cursos',
+            'route'  => 'admin.cursos.index',
+            'icon' => 'nav-icon fas fa-book',
+
+        ],
+
+        [
+            'text' => 'Publicaciones',
+            'route'  => 'admin.publicaciones.index',
+            'icon' => 'nav-icon fas fa-pen-alt',
+
         ],
         [
             'text'    => 'multilevel',
