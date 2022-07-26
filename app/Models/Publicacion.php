@@ -23,21 +23,32 @@ class Publicacion extends Model
     ];
     public $timestamps = false;
 
+    public function publicaciondocente()
+    {
+        return $this->belongsToMany(Docente::class, 'docente_publicacion', 'publicacion_id','docentes_id');
+    }
+
     public function curso()
     {
-        return $this->belongsTo(Curso::class,'cursos_id','id');
+        return $this->belongsTo(Curso::class, 'cursos_id', 'id');
     }
-    public function nivel()
+    public function nivelpublicacion()
     {
-        return $this->belongsTo(Nivel::class,'niveles_id','id');
+        return $this->belongsTo(Nivel::class, 'niveles_id', 'id');
     }
-    public function docente()
+
+    public function tipopublicacion()
     {
-        return $this->belongsTo(Docente::class,'docentes_id','id');
+        return $this->belongsTo(TipoPublicacion::class, 'tipopublicacion_id', 'id');
     }
+
     public function matriculados()
     {
-        return $this->hasMany(Matricula::class,'publicacion_id','id');
+        return $this->hasMany(Matricula::class, 'publicacion_id', 'id');
     }
     
+    public function modulos()
+    {
+        return $this->hasMany(Modulo::class, 'publicacion_id', 'id');
+    }
 }

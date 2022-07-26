@@ -14,8 +14,8 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
-    'title_prefix' => '',
+    'title' => 'FUNDASAM',
+    'title_prefix' => 'Gestion | ',
     'title_postfix' => '',
 
     /*
@@ -45,7 +45,7 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
+    'logo' => '<b>FUD</b>UNASAM',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -226,43 +226,45 @@ return [
 
     'menu' => [
         // Navbar items:
-        [
-            'type'         => 'navbar-search',
-            'text'         => 'search',
-            'topnav_right' => true,
-        ],
+        
         [
             'type'         => 'fullscreen-widget',
             'topnav_right' => true,
         ],
 
         // Sidebar items:
+
+        
         [
-            'type' => 'sidebar-menu-search',
-            'text' => 'search',
-        ],
-        [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
-        [
-            'text'        => 'pages',
+            'text'        => 'Home',
             'url'         => 'admin/pages',
-            'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
-            'label_color' => 'success',
+            'icon'        => 'nav-icon fas fa-home',
+            
         ],
-        ['header' => 'account_settings'],
+        ['header' => 'Academico'],
         [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
+            'text' => 'Estudianes',
+            'route'  => 'admin.estudiantes.index',
+            'icon' => 'nav-icon fas fa-user-graduate',
         ],
         [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
+            'text' => 'Docentes',
+            'route'  => 'admin.docentes.index',
+            'icon' => 'nav-icon fas fa-chalkboard-teacher',
+        ],
+
+        [
+            'text' => 'Cursos',
+            'route'  => 'admin.cursos.index',
+            'icon' => 'nav-icon fas fa-book',
+
+        ],
+
+        [
+            'text' => 'Publicaciones',
+            'route'  => 'admin.publicaciones.index',
+            'icon' => 'nav-icon fas fa-pen-alt',
+
         ],
         [
             'text'    => 'multilevel',
@@ -472,5 +474,5 @@ return [
     |
     */
 
-    'livewire' => false,
+    'livewire' => true,
 ];

@@ -24,9 +24,18 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
+    
+    Route::get('/perfil', function () {return view('web.perfil');});
     Route::view('/cursos', 'livewire.cursos.index')->name('curso.index');
-    //Route::get('/perfil', function () {return view('web.perfil');});
+    Route::view('/curso/{idpublicacion}', 'livewire.detallecurso.index')->name('detallecurso.index');
     //Route::get('/cursos',  function () {return view('web.cursos');});
+
+    Route::view('/gestion/estudiantes', 'livewire.admin.estudiantes.index')->name('admin.estudiantes.index');
+    // Route::view('/administrador', 'livewire.admin.docente.index')->name('admin.estudiantes.index');
+    Route::view('/gestion/docentes', 'livewire.admin.docentes.index')->name('admin.docentes.index');
+    Route::view('/gestion/cursos', 'livewire.admin.cursos.index')->name('admin.cursos.index');
+   	Route::view('/gestion/publicaciones', 'livewire.admin.publicaciones.index')->name('admin.publicaciones.index');
+   
 });
 
 
