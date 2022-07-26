@@ -16,6 +16,7 @@ class RoleSeeder extends Seeder
         //Creacion de roles del sistema
  
     $role1= Role::Create(['name' => 'estudiante']);
-    $role3= Role::Create(['name' => 'docente']);
+    $role2= Role::Create(['name' => 'docente']);
+    $role3= Role::Create(['name' => 'admin']);
     }
 }

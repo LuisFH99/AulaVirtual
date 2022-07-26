@@ -124,3 +124,29 @@ a .btn-card{
     font-size: var(--text-font-lg);
     font-family: var(--text-type);
 }
+
+.tit >p{
+    color: var(--secondary) !important;
+}
+
+
+.session_details{
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+    margin: auto;
+}
+
+@media (max-width: 1024px) {
+    .session_details{
+        width: 95%;
+    }
+}
+
+
+.embed-container{
+    border-radius: 12px;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    padding: 0;
+    margin: 0;
+    position: absolute;
+}
