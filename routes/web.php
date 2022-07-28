@@ -43,3 +43,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::view('/cursosDetalle', 'web.cursoDetalle');
 Route::view('/cursoVideo','web.cursoVideo');
+Route::view('/tareas','web.cursoTarea');
+Route::view('/entrega','web.entrega');
