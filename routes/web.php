@@ -28,6 +28,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/perfil', function () {return view('web.perfil');});
     Route::view('/cursos', 'livewire.cursos.index')->name('curso.index');
     Route::view('/curso/{idpublicacion}', 'livewire.detallecurso.index')->name('detallecurso.index');
+    Route::view('/curso/tema/{idtema}', 'livewire.temas.index')->name('tema.index');
     //Route::get('/cursos',  function () {return view('web.cursos');});
 
     Route::view('/gestion/estudiantes', 'livewire.admin.estudiantes.index')->name('admin.estudiantes.index');

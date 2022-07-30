@@ -25,7 +25,7 @@ class Publicacion extends Model
 
     public function publicaciondocente()
     {
-        return $this->belongsToMany(Docente::class, 'docente_publicacion', 'publicacion_id','docentes_id');
+        return $this->belongsToMany(Docente::class, 'docente_publicacion', 'publicacion_id', 'docentes_id');
     }
 
     public function curso()
@@ -46,9 +46,14 @@ class Publicacion extends Model
     {
         return $this->hasMany(Matricula::class, 'publicacion_id', 'id');
     }
-    
+
     public function modulos()
     {
         return $this->hasMany(Modulo::class, 'publicacion_id', 'id');
+    }
+
+    public function examen()
+    {
+        return $this->belongsTo(Examen::class,'publicacion_id','id');
     }
 }

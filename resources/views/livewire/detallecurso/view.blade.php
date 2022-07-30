@@ -78,12 +78,16 @@
                                         <ul class="sesiones">
                                             @foreach ($modulo->temas as $tema)
                                                 <li>
-                                                    <a href="#">
+                                                    <a
+                                                        href="{{ $tema->recursos->count() > 0 ? route('tema.index', $tema->id) : '#' }}">
                                                         <i class="fa fa-play-circle"></i>
-                                                        {{ $tema->descripcion }}<button class="ver">Ver</button>
+                                                        {{ $tema->descripcion }}
+                                                        @if ($tema->recursos->count() > 0)
+                                                            <button class="ver">Ver</button>
+                                                        @endif
                                                     </a>
-                                                    
-                                                    <p>{{ date('d/m/Y',strtotime($tema->fecha)) }}</p>
+
+                                                    <p>{{ date('d/m/Y', strtotime($tema->fecha)) }}</p>
                                                 </li>
                                             @endforeach
 
@@ -98,16 +102,20 @@
             </div>
         </div>
         {{-- Examen Final --}}
-        <div class="examensubir" id="link_preguntas">
-            <h1>Examen final</h1>
-            <p>
-                El Examen se debe resolver de forma total, teniendo en cuenta la fecha de cese de la activación
-                de su cuenta.
-                Antes de resolver el Examen se sugiere ver todos los videos del curso.
-                <br><br>
-            </p>
-            <a href="#" class="btn-card p-2" style="text-decoration: none">Presentar Examen</a>
-        </div>
+        @if (!is_null($publicacion->examen))
+            <div class="examensubir">
+                <h1>Examen final</h1>
+                <p>
+                    El Examen se debe resolver de forma total, teniendo en cuenta la fecha de cese de la activación
+                    de su cuenta.
+                    Antes de resolver el Examen se sugiere ver todos los videos del curso.
+                    <br><br>
+                </p>
+                <a href="#" class="btn-card p-2" style="text-decoration: none">Presentar Examen</a>
+            </div>
+        @endif
+
+
     </div>
     <div class="col-md-4 curso_right">
         <div class="contenido">

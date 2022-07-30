@@ -4,14 +4,17 @@
             <div class="row">
                 <div class="miscursos_left col-md-3">
                     <div class="card_item">
-                        <p class="tit fw-bold" style="background: #007AF3">Categorías</p>
-                        <div class="list">
-                            @foreach ($categorias as $categoria)
-                                <button type="button" class="btn btn-primary"
-                                    wire:click="SeleccionarCategoria('{{ $categoria->nombre }}')">{{ $categoria->nombre }}</button>
+                        <p class="tit fw-bold" style="background: #007AF3" wire:click.prevent="SeleccionarCategoria('0')">Categorías - Todas</p>
+                        <div class="liscategory">
+                            <ul >
+                                @foreach ($categorias as $categoria)
+                                    <li >
+                                        <a href="#"
+                                            wire:click.prevent="SeleccionarCategoria('{{ $categoria->nombre }}')">{{ $categoria->nombre }}</a>
+                                    </li>
+                                @endforeach
 
-                                {{-- <a href="" wire:click="uptadefilter({{$categoria->nombre}})">{{ $categoria->nombre }}</a> --}}
-                            @endforeach
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -47,7 +50,9 @@
                                                 <p>Certificación <span> {{ $matriculauser->publicacion->horas }} horas
                                                         académicas</span></p>
                                             </div>
-                                            <div class="boton"><a href="{{route('detallecurso.index',$matriculauser->publicacion->id)}}" class="btn btn-card">Ver Curso</a>
+                                            <div class="boton"><a
+                                                    href="{{ route('detallecurso.index', $matriculauser->publicacion->id) }}"
+                                                    class="btn btn-card">Ver Curso</a>
                                             </div>
                                         </div>
                                     </div>
@@ -77,7 +82,9 @@
                                                 <p>Certificación <span> {{ $matriculauser->publicacion->horas }} horas
                                                         académicas</span></p>
                                             </div>
-                                            <div class="boton"><a href="{{route('detallecurso.index',$matriculauser->publicacion->id)}}" class="btn btn-card">Ver Curso</a>
+                                            <div class="boton"><a
+                                                    href="{{ route('detallecurso.index', $matriculauser->publicacion->id) }}"
+                                                    class="btn btn-card">Ver Curso</a>
                                             </div>
                                         </div>
                                     </div>

@@ -16,7 +16,6 @@ class DetalleCurso extends Component
     public function render()
     {
         $publicacion=Publicacion::where('id',$this->publicacion_id)->first();
-        // dd($publicacion);
         return view('livewire.detallecurso.view',compact('publicacion'));
     }
 }
