@@ -77,11 +77,16 @@ ul li p{
 }
 
 .btn-primario{
-    background-color: var(--secondary);
-    color: var(--white);
+    background-color: var(--white);
+    color: var(--primary);
     border-radius: 40px;
+    font-family: var(--text-type);
+    border: 1px solid var(--secondary);
 }
 
+.btn-primario i{
+    color: var(--primary);
+}
 
 .btn-primario:hover{
     background-color: var(--primary);
@@ -89,16 +94,58 @@ ul li p{
     font-weight: lighter;
 }
 
-.btn-cancel{
-    background-color: rgb(108,117,125);
+.btn-primario:hover i{
     color: var(--white);
+}
+
+.btn-primary{
+    background-color: var(--secondary);
+    color: white;
     border-radius: 40px;
+    font-family: var(--text-type);
+    border: 1px solid var(--secondary);
+    font-size: smaller;
+}
+
+.btn-danger{
+    background-color: red;
+    color: white;
+    border-radius: 40px;
+    font-family: var(--text-type);
+    border: 1px solid red;
+    font-size: smaller;
+}
+
+
+.btn-success{
+    background-color: green;
+    color: white;
+    border-radius: 40px;
+    font-family: var(--text-type);
+    border: 1px solid green;
+}
+.btn-cancel{
+    background-color: var(--white);
+    color: rgb(108,117,125);
+    border-radius: 40px;
+    font-family: var(--text-type);
+    border: 1px solid rgb(108,117,125);
+}
+
+.btn-cancel i{
+    color: rgb(108,117,125);
 }
 
 .btn-cancel:hover{
     background-color: rgb(97, 104, 110);
     color: var(--white);
 }
+
+.btn-cancel:hover i{
+    
+    color: var(--white);
+}
+
 
 .btn-card{
     margin-top: 2px;
@@ -334,73 +381,6 @@ section .details span{
 
 /* 251,251,255 */
 
-/*Entrega tarea*/
-
-.drag-area{
-    border: 5px dashed #ddd;
-    height: 500px;
-    width: 700px;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-
-.drag-area.active{
-    background-color: #b8d4fe;
-    color: black;
-    border: 2px dashed #618ac9;
-}
-
-.drag-area h2{
-    font-size: 30px;
-    font-weight: 500;
-    color: #000;
-    font-family: var(--text-type);
-}
-
-.drag-area span{
-    font-size: 25px;
-    font-weight: 500;
-    color: #000;
-}
-
-.drag-area button{
-    padding: 10px 25px;
-    font-size: 20px;
-    border: 0;
-    outline: none;
-    background-color: #5256ad;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: 20px;
-}
-
-.file-container{
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px;
-    border: solid 1px #ddd;
-}
-
-#preview{
-    margin-top: 10px;
-}
-
-.status-text{
-    padding: 0 10px;
-}
-
-.success{
-    color: #52ad5a;
-}
-
-.failure{
-    color: #ff0000;
-}
 
 /*Subir Archivo*/
 
@@ -417,7 +397,7 @@ section .details span{
     font-size: 20px;
     cursor: pointer;
     color: #cccccc;
-    border: 5px dashed var(--secondary);
+    border: 4px dashed var(--secondary);
     flex-direction: column;
   }
   
@@ -467,6 +447,49 @@ section .details span{
     }
 }
 
+.form-tarea{
+    display: flex;
+    flex-direction: column;
+    font-family: var(--text-type);
+    font-size: 16px;
+    margin-left: 12px;
+}
+
+
+.form-tarea label{
+    margin-bottom: 15px;
+}
+
+
+.form-tarea label span{
+    text-align: left;
+}
+
+
+.form-input{
+    width: 43%;
+    height: 33px;
+    border: 1px solid var(--secondary);
+    border-radius: 5px;
+    outline: none;
+    position: absolute;
+    margin-left: 60px;
+     /*Nos sirve para quitar el borde generado cuando damos click a un input*/
+}
+.form-input-fecha{
+    width: 43%;
+    height: 33px;
+    border: 1px solid var(--secondary);
+    border-radius: 5px;
+    outline: none;
+    position: absolute;
+    margin-left: 20px;
+}
+
+.sesiones{
+    display: flex;
+    flex-direction: column;
+}
 
 /* .btn-card{
     margin-top: 2px;

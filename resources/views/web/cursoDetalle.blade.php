@@ -60,19 +60,33 @@
                                             <div class="accordion-body">
                                                 <ul class="sesiones">
                                                     <li>
-                                                        <a href="#">
-                                                            <i class="fa fa-play-circle"></i> Aspectos generales I<button class="ver">Ver</button>                                                        </a>
-                                                        <p>00:24:03</p>
+                                                        <a href="">
+                                                            <i class="fa-solid fa-paperclip"></i> Link clases
+                                                            <button class="ver bg-primary">Insertar Link</button>
+                                                        </a>
                                                     </li>
                                                     <li>
                                                         <a href="#">
-                                                            <i class="fa fa-play-circle"></i> Aspectos generales II <button class="ver">Ver</button>                                                        </a>
-                                                        <p>00:37:08</p>
+                                                            <i class="fa fa-play-circle"></i> Aspectos generales I
+                                                            <button class="ver">Insertar Recursos</button>
+                                                        </a>
                                                     </li>
                                                     <li>
                                                         <a href="#">
-                                                            <i class="fa fa-play-circle"></i> Aspectos generales III <button class="ver">Ver</button>                                                        </a>
-                                                        <p>00:29:00</p>
+                                                            <i class="fa fa-play-circle"></i> Aspectos generales II <button class="ver">Insertar Recursos</button>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            <i class="fa fa-play-circle"></i> Aspectos generales III <button class="ver">Insertar Recursos</button>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#">
+                                                            <i class="fa-solid fa-folder"></i> 
+                                                            Tarea_01 
+                                                            <button class="ver bg-danger">Crear Tarea</button>
+                                                        </a>
                                                     </li>
                                                 </ul>
                                             </div>

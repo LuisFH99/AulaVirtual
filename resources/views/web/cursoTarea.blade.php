@@ -18,7 +18,7 @@
                 <h4 class="mb-3 px-2">TAREA DEL MODULO 1</h4>
               </div>
               <div class="tit2">
-                <p>Estimado estudiante se requiere la entrega de la tarea, referencia al tema ......</p>
+                <p style="font-family: font-semibold">Estimado estudiante se requiere la entrega de la tarea, referencia al tema ......</p>
                 <a href="/" class="recurso" target="_blank"><img class="img-fluid" src="{{ asset('img/img_tarea.svg') }}" width="20" alt="">&nbsp;Archivo_tarea_modulo_1.pdf</a>
               </div>
             </div>

@@ -45,3 +45,8 @@ Route::view('/cursosDetalle', 'web.cursoDetalle');
 Route::view('/cursoVideo','web.cursoVideo');
 Route::view('/tareas','web.cursoTarea');
 Route::view('/entrega','web.entrega');
+/*Vista para el docente*/
+Route::view('/cursosDocentes', 'web.cursoDocente');
+Route::view('/CrearTarea','web.CrearTarea');
+Route::view('/CrearRecursos','web.CrearRecursos');
+Route::view('/CrearClase','web.CrearClase');
