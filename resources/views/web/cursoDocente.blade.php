@@ -145,7 +145,7 @@
                             Usted, podra generar un examen final con todos los temas de los modulos, seleccione <b>"Generar Examen"</b> para empezar a crearlo.
                             <br><br>
                         </p>
-                    <a href="#" class="btn-card p-2" style="text-decoration: none">Generar Examen</a>
+                    <a href="/Cuestionario" class="btn-card p-2" style="text-decoration: none">Generar Examen</a>
                 </div>
             </div>
             <div class="col-md-4 curso_right">
