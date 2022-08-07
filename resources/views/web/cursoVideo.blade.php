@@ -5,16 +5,14 @@
         <div class="row justify-content-center">
             <div class="col-md-10 sesion_left">
                 <div class='embed-container'>
-                    <div style="align-content: center">
-                        <iframe  id="iframe_vimeo" src="https://player.vimeo.com/video/656301294?h=c813b472ea&autoplay=1&title=0&byline=0&portrait=0"
+                        <iframe  id="iframe_vimeo" src="tps://player.vimeo.com/video/656301294?h=c813b472ea&autoplay=1ht&title=0&byline=0&portrait=0"
                             style="position:absolute;top:0;left:0;width:100%;height:100%;"
                             frameborder="0"
-                            allow="autoplay; fullscreen; picture-in-picture"
+                            allow="pause; fullscreen; picture-in-picture"
                             allowfullscreen>
                         </iframe>
-                    </div>
                 </div>
-                <div class="row mt-4">
+                <div class="row mt-4 ">
                     <div class="col-md-6 session_details mt-0 mb-3">
                         <div class="col-md-12 mb-2">
                             <span class="tit"><p>CONTABILIDAD GENERAL</p></span>

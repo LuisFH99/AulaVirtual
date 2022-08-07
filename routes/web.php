@@ -46,7 +46,16 @@ Route::middleware(['auth'])->group(function () {
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+
 // Route::view('/cursosDetalle', 'web.cursoDetalle') -> generado;
 // Route::view('/cursoVideo','web.cursoVideo')-> generado;
 Route::view('/tareas', 'web.cursoTarea');
 Route::view('/entrega', 'web.entrega');
+
+/*Vista para el docente*/
+Route::view('/cursosDocentes', 'web.cursoDocente');
+Route::view('/CrearTarea','web.CrearTarea');
+Route::view('/CrearRecursos','web.CrearRecursos');
+Route::view('/CrearClase','web.CrearClase');
+Route::view("/Cuestionario",'web.Cuestionario');
+
