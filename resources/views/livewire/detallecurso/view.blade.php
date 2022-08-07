@@ -91,6 +91,21 @@
                                                 </li>
                                             @endforeach
 
+                                            @if ($modulo->tareas->count() > 0)
+                                                @foreach ($modulo->tareas as $key => $tarea)
+                                                    <li>
+                                                        <a href="{{ route('tarea.index', $tarea->id) }}">
+                                                            <i class="fa-solid fa-file-circle-exclamation"></i>
+                                                            Tarea N° {{ $key + 1 }}
+
+                                                            <button class="ver">Ingresar</button>
+
+                                                        </a>
+
+                                                    </li>
+                                                @endforeach
+                                            @endif
+
                                         </ul>
                                     </div>
                                 </div>

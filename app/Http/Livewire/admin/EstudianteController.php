@@ -7,7 +7,7 @@ use App\Models\Estudiante;
 
 class EstudianteController extends Component
 {
-    public $dni="hola";
+    // public $dni="hola";
     public $apellidos,$nombres,$correo,$fecha_nacimiento,$celular;
 
     public function render()

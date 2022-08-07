@@ -1,5 +1,5 @@
 <div class="row d-flex justify-content-center">
-    <div class="col-md-11 card card-success card-outline mt-1">
+    {{-- <div class="col-md-11 card card-success card-outline mt-1">
         <div class="card-body">
             <div class="row">
                 <div class="col-md-4">
@@ -48,7 +48,7 @@
             <button type="button" class="btn btn-danger" wire:click="limpiar"><i
                     class="far fa-times-circle mr-2"></i>Cancelar</button>
         </div>
-    </div>
+    </div> --}}
     <div class="col-md-12 mt-1 card" style="background-color: rgba(107, 155, 245, 0.12)"">
         <div class="card-body mx-0 px-0">
             <table class="table table-sm">
@@ -56,6 +56,7 @@
                     <tr style="text-align: center;">
                         <th scope="col">#</th>
                         <th scope="col">Apellidos y Nombres</th>
+                        <th scope="col">Especialidad/Profesion</th>
                         <th scope="col">N° DNI</th>
                         <th scope="col">Correo</th>
                         <th scope="col">N° de celular</th>
@@ -69,11 +70,16 @@
                             <th style="vertical-align: middle" scope="row">{{ $key + 1 }}</th>
                             <td style="vertical-align: middle" class="text-uppercase">
                                 {{ $estudiante->datos->fullname() }}</td>
-                            <td style="vertical-align: middle" class="text-center">{{ $estudiante->datos->dni }}</td>
-                            <td style="vertical-align: middle" class="text-center">{{ $estudiante->datos->correo }}</td>
-                            <td style="vertical-align: middle" class="text-center">{{ $estudiante->datos->celular }}
-                            </td>
                             <td style="vertical-align: middle" class="text-center">
+                                {{ is_null($estudiante->profesion) ? '-' : $estudiante->profesion }}</td>
+                            <td style="vertical-align: middle; width: 15px" class="text-center">
+                                {{ $estudiante->datos->dni }}</td>
+                            <td style="vertical-align: middle; width: 15px" class="text-center">
+                                {{ $estudiante->datos->correo }}</td>
+                            <td style="vertical-align: middle; width: 15px" class="text-center">
+                                {{ $estudiante->datos->celular }}
+                            </td>
+                            <td style="vertical-align: middle; width: 15px" class="text-center">
                                 {{ date('d/m/Y', strtotime($estudiante->datos->fechNac)) }}</td>
 
                             <td style="vertical-align: middle;">

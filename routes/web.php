@@ -24,25 +24,29 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
-    
-    Route::get('/perfil', function () {return view('web.perfil');});
+
+    Route::get('/perfil', function () {
+        return view('web.perfil');
+    });
     Route::view('/cursos', 'livewire.cursos.index')->name('curso.index');
     Route::view('/curso/{idpublicacion}', 'livewire.detallecurso.index')->name('detallecurso.index');
     Route::view('/curso/tema/{idtema}', 'livewire.temas.index')->name('tema.index');
+    Route::view('/curso/tarea/{idtarea}', 'livewire.tareas.index')->name('tarea.index');
+    Route::view('/curso/tarea/{idtarea}/entrega/{idmatricula}', 'livewire.entregables.index')->name('entregable.index');
     //Route::get('/cursos',  function () {return view('web.cursos');});
 
     Route::view('/gestion/estudiantes', 'livewire.admin.estudiantes.index')->name('admin.estudiantes.index');
     // Route::view('/administrador', 'livewire.admin.docente.index')->name('admin.estudiantes.index');
     Route::view('/gestion/docentes', 'livewire.admin.docentes.index')->name('admin.docentes.index');
     Route::view('/gestion/cursos', 'livewire.admin.cursos.index')->name('admin.cursos.index');
-   	Route::view('/gestion/publicaciones', 'livewire.admin.publicaciones.index')->name('admin.publicaciones.index');
-   
+    Route::view('/gestion/publicaciones', 'livewire.admin.publicaciones.index')->name('admin.publicaciones.index');
+    Route::view('/gestion/matriculados', 'livewire.admin.matricula.index')->name('admin.matricula.index');
 });
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::view('/cursosDetalle', 'web.cursoDetalle');
-Route::view('/cursoVideo','web.cursoVideo');
-Route::view('/tareas','web.cursoTarea');
-Route::view('/entrega','web.entrega');
+// Route::view('/cursosDetalle', 'web.cursoDetalle') -> generado;
+// Route::view('/cursoVideo','web.cursoVideo')-> generado;
+Route::view('/tareas', 'web.cursoTarea');
+Route::view('/entrega', 'web.entrega');

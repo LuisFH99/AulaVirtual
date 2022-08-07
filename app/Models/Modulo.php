@@ -11,7 +11,8 @@ class Modulo extends Model
     protected $table = 'modulos';
     protected $fillable = [
         'link',
-        'nombre'
+        'nombre',
+        'publicacion_id'
     ];
     public $timestamps = false;
 
@@ -22,6 +23,10 @@ class Modulo extends Model
     public function temas()
     {
         return $this->hasMany(Tema::class,'modulos_id','id');
+    }
+    public function tareas()
+    {
+        return $this->hasMany(Tarea::class,'modulos_id','id');
     }
 
 }

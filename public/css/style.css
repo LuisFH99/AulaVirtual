@@ -193,6 +193,8 @@ a .btn-card {
     color: var(--primary);
     font-weight: 700;
   }
+
+  
 /**Interfaz tareas*/
 .card-tarea{
     border-radius: 15px;
