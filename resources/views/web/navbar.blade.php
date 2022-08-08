@@ -1,15 +1,15 @@
 <nav class="navbar navbar-expand-md navbar-dark">
     <div class="container-fluid justify-content-center">
         <a class="navbar-brand mr-auto" href="/" style="margin-left: 15px; align-content: center">
-          <img src="https://admision.unasam.edu.pe/page/img/logo-licenciado.png" alt="" width="200" class="d-inline-block align-text-top">
+          <img src="{{ asset('img/logo-fundasam.png') }}" alt="" width="30" class="d-inline-block align-text-top">
         </a>
         
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav me-auto">
+        <div class="collapse navbar-collapse container-fluid justify-content-center" id="navbarNav">
+          <ul class="navbar-nav mx-auto">
             <li class="nav-item">
               <a class="nav-link" href="/perfil" ><i class="fas fa-user"></i>&nbsp;&nbsp;Mi perfil</a>
             </li>
@@ -42,7 +42,6 @@
               </ul>
             </li>
           </ul>
-          
         </div>
     </div>        
 </nav>

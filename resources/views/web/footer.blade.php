@@ -3,7 +3,7 @@
         <div class="row justify-content-center">
             <div class="col-md-4">
                 <div class="footer_">
-                    <img src="https://admision.unasam.edu.pe/page/img/logo-licenciado.png" alt="">
+                    <img src="{{ asset('img/logo-fundasam.png')}}" alt="">
                     <span> © 2022 Copyright. Todos los derechos reservados.</span>
                 </div>
             </div>

@@ -17,13 +17,11 @@ class Cursos extends Component
         $categorias = Categoria::all();
         $estudiante = Estudiante::where('persona_id', auth()->user()->personas_id)->first();
         $allmatriculauser = Matricula::where('estudiantes_id', $estudiante->id)->get();
-        //dd($allmatriculauser);
         return view('livewire.cursos.view', compact('categorias', 'allmatriculauser'));
     }
 
     public function SeleccionarCategoria($dato)
     {
-        //dd($dato);
         $this->aux = $dato;
     }
 }

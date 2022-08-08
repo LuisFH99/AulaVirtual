@@ -35,6 +35,11 @@ Route::middleware(['auth'])->group(function () {
     Route::view('/curso/tarea/{idtarea}/entrega/{idmatricula}', 'livewire.entregables.index')->name('entregable.index');
     //Route::get('/cursos',  function () {return view('web.cursos');});
 
+    Route::view('/docente/cursos', 'livewire.docentes.cursos.index')->name('docentes.curso.index');
+    Route::view('/docente/curso/{idpublicacion}', 'livewire.docentes.publicacion.index')->name('docentes.publicacion.index');
+
+
+
     Route::view('/gestion/estudiantes', 'livewire.admin.estudiantes.index')->name('admin.estudiantes.index');
     // Route::view('/administrador', 'livewire.admin.docente.index')->name('admin.estudiantes.index');
     Route::view('/gestion/docentes', 'livewire.admin.docentes.index')->name('admin.docentes.index');

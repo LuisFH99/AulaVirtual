@@ -22,6 +22,6 @@ class Docente extends Model
 
     public function docentepublicacion()
     {
-        return $this->belongsToMany(Publicacion::class, 'docente_publicacion','publicacion_id','docentes_id');
+        return $this->belongsToMany(Publicacion::class, 'docente_publicacion','docentes_id','publicacion_id');
     }
 }
