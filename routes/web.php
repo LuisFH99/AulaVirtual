@@ -51,3 +51,7 @@ Route::view('/CrearTarea','web.CrearTarea');
 Route::view('/CrearRecursos','web.CrearRecursos');
 Route::view('/CrearClase','web.CrearClase');
 Route::view("/Cuestionario",'web.Cuestionario');
+
+/*Revision de tareas actualizacion 11-08-2022*/
+Route::view("/revisionTareas",'web.revisionTareas');
+Route::view("/listaRevision",'web.listaRevision');

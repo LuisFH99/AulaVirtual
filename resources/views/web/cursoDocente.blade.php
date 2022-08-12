@@ -128,7 +128,18 @@
                                                             <img class="fluid-img" src="{{ asset('img/img_tarea.svg') }}" width="25" alt="">&nbsp;Tarea_01
                                                         </a> 
                                                         </div>
-
+                                                    </li>
+                                                    <!-- seccion de revision -->
+                                                    <li>
+                                                        <div class="d-flex align-items-start flex-column bd-highlight mb-3">
+                                                        <span>
+                                                            <i class="fa-solid fa-circle-check" style="color: black"></i>&nbsp;Calificaciones&nbsp;
+                                                        </span>
+                                                        <!-- item de las tareas creadas -->
+                                                        <a href="/listaRevision" class="py-2 px-5" title="Click para calificar">
+                                                            <img class="fluid-img" src="{{ asset('img/img_tarea.svg') }}" width="25" alt="">&nbsp;Tarea_01
+                                                        </a>
+                                                        </div>
                                                     </li>
                                                 </ul>
                                             </div>
