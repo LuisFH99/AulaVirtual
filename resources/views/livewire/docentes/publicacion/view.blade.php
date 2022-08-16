@@ -94,9 +94,13 @@
                                                             <i class="fa fa-play-circle"
                                                                 style="color: black; font-size: 23px""></i>&nbsp;
                                                             {{ $tema->descripcion }}&nbsp;
-                                                            <a href="/CrearRecursos"
-                                                                class="btn btn-success btn-sm text-white">Agregar
-                                                                Recursos</a>
+                                                            <button type="button"
+                                                                class="btn btn-success btn-sm text-white"
+                                                                wire:click.prevent="addRecurso('{{ $modulo->nombre }}','{{ $tema->descripcion }}',{{ $tema->id }})">Agregar
+                                                                Recursos</button>
+                                                            {{-- <a href="#"
+                                                                class="btn btn-success btn-sm text-white" wire:click.prevent="addRecurso()">Agregar
+                                                                Recursos</a> --}}
                                                         </span>
                                                         @foreach ($tema->recursos as $key => $recurso)
                                                             <span class="mt-2">
@@ -109,7 +113,8 @@
                                                                         {{ $recurso->descripcion }}</span>
                                                                 </a>
                                                                 <i class="fas fa-minus-circle"
-                                                                    style="color: red; font-size: 20px"></i>
+                                                                    style="color: red; font-size: 20px"
+                                                                    wire:click.prevent="eliminarRecurso({{ $recurso->id }})"></i>
                                                             </span>
                                                         @endforeach
                                                     </div>
@@ -123,22 +128,27 @@
                                                     <span>
                                                         <i class="fa-solid fa-folder"
                                                             style="color: black; font-size: 20px"></i>&nbsp;Tareas&nbsp;
-                                                        <a href="/CrearTarea"
-                                                            class="btn btn-danger btn-sm text-white ml-5">Crear
-                                                            Tarea</a>
+                                                        <button type="button"
+                                                            class="btn btn-danger btn-sm text-white ml-5"
+                                                            wire:click.prevent="addTarea('{{ $modulo->nombre }}','{{ $modulo->id }}')">Crear
+                                                            Tarea</button>
                                                     </span>
                                                     <!-- item de las tareas creadas -->
                                                     @foreach ($modulo->tareas as $key => $tarea)
-                                                        <span>
-                                                            <a href="/CrearRecursos" class="py-2 px-5">
-                                                                <img class="fluid-img"
-                                                                    src="{{ asset('img/img_tarea.svg') }}"
-                                                                    width="25"
-                                                                    alt="">&nbsp;Tarea_{{ $key + 1 }}
-                                                            </a>
-                                                            <i class="fas fa-minus-circle"
-                                                                    style="color: red; font-size: 20px"></i>
-                                                        </span>
+                                                        @if ($modulo->id == $tarea->modulos_id)
+                                                            <span>
+                                                                <a href="{{ asset($tarea->ruta_archivo) }}"
+                                                                    class="py-2 px-5" download>
+                                                                    <img class="fluid-img"
+                                                                        src="{{ asset('img/img_tarea.svg') }}"
+                                                                        width="25"
+                                                                        alt="">&nbsp;Tarea_{{ $key + 1 }}
+                                                                </a>
+                                                                <i class="fas fa-minus-circle"
+                                                                    style="color: red; font-size: 20px"
+                                                                    wire:click.prevent="eliminarTarea({{ $tarea->id }})"></i>
+                                                            </span>
+                                                        @endif
                                                     @endforeach
                                                 </div>
 
@@ -183,4 +193,5 @@
             </div>
         </div>
     </div>
+    @include('livewire.docentes.publicacion.modal-create')
 </div>

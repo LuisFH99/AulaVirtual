@@ -13,6 +13,7 @@ class CursoController extends Component
 
     public function render()
     {
+        
         $categorias = Categoria::all();
         $docente = Docente::where('persona_id', auth()->user()->personas_id)->first();
         //dd($docente->docentepublicacion);

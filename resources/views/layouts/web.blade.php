@@ -9,6 +9,7 @@
     <title>Aula Virtual</title>
     <!-- css -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    
     <!-- iconos -->
     <link rel="stylesheet" href="{{ asset('icons/fontawesome-free-6.0.0-web/fontawesome-free-6.0.0-web/css/all.min.css') }}">
 
