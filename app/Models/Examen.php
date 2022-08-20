@@ -14,5 +14,5 @@ class Examen extends Model
         'peso',
         'is_final'
     ];
-    public $timestampsfalse;
+    public $timestamps=false;
 }

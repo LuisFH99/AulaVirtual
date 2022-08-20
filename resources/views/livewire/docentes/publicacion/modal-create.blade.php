@@ -42,6 +42,49 @@
                     <button type="button" class="btn btn-cancel" wire:click="cancelar"><i class="fa-solid fa-ban"
                             style="font-size: 20px"></i>&nbsp;Cancelar</button>
                 </div>
+            @elseif ($formexamen)
+                <div class="modal-header">
+                    <h5 class="font-weight-bold" id="exampleModalLabel">
+                        Generar Examen Final del curso: {{ $nombre_curso }}</h5>
+                    <button type="button" wire:click="cancelar" class="btn-close" aria-label="Close">
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-6 d-flex align-items-center">
+                            <p style="font-family: font-semibold; text-align: justify">
+                                Estimado docente, en este apartado
+                                podra generar el examen de la asignatura correspondiente.
+                            </p>
+                        </div>
+                        <div class="col-6">
+                            <div>
+                                <label class="form-label">
+                                    Duracion en minutos:
+                                </label>
+                                <input type="text" class="form-control" name="duracion" id="duracion"
+                                    wire:model="duracion" style="width: 65px">
+                            </div>
+                            <div>
+                                <label class="form-label">
+                                    Peso de examen:
+                                </label>
+                                <input type="number" class="form-control" style="width: 65px" min="1"
+                                    max="5" required="">
+                                {{-- <input type="text" class="form-input" name="peso" id="peso" wire:model="peso"> --}}
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primario" wire:click="guardarExamen"><i
+                            class="fa-solid fa-paper-plane" style="font-size: 20px"></i>&nbsp;Generar Examen</button>
+                    <button type="button" class="btn btn-cancel" wire:click="cancelar"><i class="fa-solid fa-ban"
+                            style="font-size: 20px"></i>&nbsp;Cancelar</button>
+                </div>
             @else
                 <div class="modal-header">
                     <h5 class="font-weight-bold" id="exampleModalLabel">
@@ -88,9 +131,7 @@
                     <button type="button" class="btn btn-cancel" wire:click="cancelar"><i class="fa-solid fa-ban"
                             style="font-size: 20px"></i>&nbsp;Cancelar</button>
                 </div>
-
             @endif
-
         </div>
     </div>
 </div>

@@ -154,7 +154,7 @@ ul li p {
     font-weight: normal;
     font-family: var(--text-type);
     border-radius: 40px;
-    width: 120px;
+    width: 160px;
     background-color: var(--white);
     border: 1px solid var(--primary);
 }
@@ -176,7 +176,7 @@ a .btn-card {
     color: var(--white);
     font-weight: bold;
     border-radius: 40px;
-    width: 120px;
+    width: 160px;
     font-family: var(--text-type);
     background-color: var(--primary);
 }

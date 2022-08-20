@@ -172,7 +172,9 @@
                     Examen"</b> para empezar a crearlo.
                 <br><br>
             </p>
-            <a href="/Cuestionario" class="btn-card p-2" style="text-decoration: none">Generar Examen</a>
+            <button type="button" class="btn-card p-2"
+                wire:click.prevent="addExamenFinal()">Generar Examen</button>
+            {{-- <a href="/Cuestionario" class="btn-card p-2" style="text-decoration: none">Generar Examen</a> --}}
         </div>
     </div>
     <div class="col-md-4 curso_right">

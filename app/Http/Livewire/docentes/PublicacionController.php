@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Docentes;
 
+use App\Models\Examen;
 use Livewire\Component;
 use App\Models\Publicacion;
 use App\Models\RecursosModulo;
@@ -15,9 +16,11 @@ class PublicacionController extends Component
     public $publicacion_id;
     public $vermodal = false;
     public $fromrecurso = false;
+    public $formexamen = false;
     public $nombre_curso;
     public $moduloselect, $temaselect, $temaid, $moduloid;
     public $nombre, $fecha, $doc_recurso;
+    public $duracion, $peso;
 
     public function mount()
     {
@@ -47,14 +50,29 @@ class PublicacionController extends Component
         $this->moduloid = $id;
     }
 
+    public function addExamenFinal()
+    {
+        $idtest=Examen::select('id')->where('publicacion_id',$this->publicacion_id)->where('is_final',1)->first();
+        if($idtest){
+            return redirect()->route('docentes.cuestionario.index',$idtest->id);
+        }else{
+            $this->vermodal = true;
+            $this->formexamen = true;
+        }
+        
+    }
+
     public function cancelar()
     {
-        $this->reset(['vermodal', 'fromrecurso', 'moduloselect', 'temaselect', 'temaid', 'nombre','fecha', 'moduloid', 'doc_recurso']);
+        $this->reset([
+            'vermodal', 'fromrecurso', 'moduloselect',
+            'temaselect', 'temaid', 'nombre', 'fecha',
+            'moduloid', 'doc_recurso', 'formexamen'
+        ]);
     }
 
     public function guardarRecurso()
     {
-
         $directoryname = $this->nombre_curso . "_" . $this->publicacion_id;
         if ($this->doc_recurso) {
             $filename = date("dmYhis") . "-" . $this->nombre . "." . $this->doc_recurso->getClientOriginalExtension();
@@ -83,6 +101,17 @@ class PublicacionController extends Component
             $tarea->modulos_id = $this->moduloid;
             $tarea->save();
         }
+        $this->cancelar();
+    }
+
+    public function guardarExamen()
+    {
+        $test= new Examen();
+        $test->tiempo=$this->duracion;
+        $test->peso=$this->peso;
+        $test->publicacion_id=$this->publicacion_id;
+        $test->is_final=1;
+        $test->save();
         $this->cancelar();
     }
 

@@ -19,6 +19,6 @@ class PublicacionesController extends Component
 
         session(['idpublicacion' => $idpublicacion]);
 
-        return redirect()->route('admin.matricula.index');;
+        return redirect()->route('admin.matricula.index');
     }
 }
