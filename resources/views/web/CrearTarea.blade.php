@@ -36,38 +36,6 @@
                     </label><br>
                 </form>
             </div>
-
-            {{-- <div class="card-body text-center">
-              <table class="table table-borderless tabla table-hover roudnends">
-                <tbody>
-                  <tr>
-                    <th><p>Estado de la entrega</p></th>
-                    <th><p>Trabajo Entregado</p></th>
-                  </tr>
-                  <tr>
-                    <th><p>Estado de calificacion</p></th>
-                    <th><p>Sin Calificar</p></th>
-                  </tr>
-                  <tr>
-                    <th><p>Fecha de la entrega</p></th>
-                    <th><p>martes, 26 de julio del 2022</p></th>
-                  </tr>
-                  <tr>
-                    <th><p>Ultima modificacion</p></th>
-                    <th><p>-</p></th>
-                  </tr>
-                  <tr>
-                    <th><p>Archivos enviados</p></th>
-                    <th><p>tarea_01_modulo_01.pdf</p></th>
-                  </tr>
-                </tbody>
-              </table>
-              <a href="/entrega" class="btn btn-card mb-2">Entregar&nbsp;<i class="fa-solid fa-floppy-disk"></i></a>
-              <p>
-                <small>Todavia no has realizado una entrega</small>
-              </p>
-          </div> --}}
-
         </div>
     </div>
 @endsection

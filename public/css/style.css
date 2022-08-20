@@ -14,6 +14,7 @@ body {
     flex-direction: column;
     min-height: 100vh;
 }
+
 footer {
     margin-top: auto;
 }
@@ -71,9 +72,14 @@ ul li p {
     color: var(--secondary) !important;
 }
 
-.footer {
+
+
+.footer{
     background: var(--primary) !important;
     font-weight: bold;
+    /* bottom: 0;
+    position: absolute;
+    width: 100%; */
 }
 
 
@@ -510,3 +516,16 @@ section .details span{
     background-color: var(--primary);
 }
 
+.tab-tareas th{
+    background-color: var(--primary);
+    color: white;
+    border: none;
+}
+
+.tab-tareas tr{
+    border-bottom: 1px solid #cccccc;
+}
+
+.cabecera-modal{
+    background-color: var(--secondary);
+}
