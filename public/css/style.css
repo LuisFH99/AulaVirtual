@@ -77,9 +77,7 @@ ul li p {
 .footer{
     background: var(--primary) !important;
     font-weight: bold;
-    /* bottom: 0;
-    position: absolute;
-    width: 100%; */
+    margin-top: auto;
 }
 
 

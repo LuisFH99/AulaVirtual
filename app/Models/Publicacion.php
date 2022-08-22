@@ -54,6 +54,6 @@ class Publicacion extends Model
 
     public function examen()
     {
-        return $this->belongsTo(Examen::class,'publicacion_id','id');
+        return $this->hasMany(Examen::class,'publicacion_id','id');
     }
 }

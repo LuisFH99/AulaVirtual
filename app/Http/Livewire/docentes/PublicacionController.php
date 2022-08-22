@@ -52,14 +52,15 @@ class PublicacionController extends Component
 
     public function addExamenFinal()
     {
-        $idtest=Examen::select('id')->where('publicacion_id',$this->publicacion_id)->where('is_final',1)->first();
-        if($idtest){
-            return redirect()->route('docentes.cuestionario.index',$idtest->id);
-        }else{
+        $examen = Examen::where('publicacion_id', $this->publicacion_id)->where('is_final', 1)->first();
+        // dd($examen);
+        if ($examen) {
+            session(['idexamen' => $examen->id]);
+            return redirect()->route('docentes.cuestionario.index');
+        } else {
             $this->vermodal = true;
             $this->formexamen = true;
         }
-        
     }
 
     public function cancelar()
@@ -106,11 +107,12 @@ class PublicacionController extends Component
 
     public function guardarExamen()
     {
-        $test= new Examen();
-        $test->tiempo=$this->duracion;
-        $test->peso=$this->peso;
-        $test->publicacion_id=$this->publicacion_id;
-        $test->is_final=1;
+        $test = new Examen();
+        $test->tiempo = $this->duracion;
+        $test->peso = $this->peso;
+        $test->publicacion_id = $this->publicacion_id;
+        $test->is_final = 1;
+        $test->is_visible = 0;
         $test->save();
         $this->cancelar();
     }

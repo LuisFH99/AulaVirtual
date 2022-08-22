@@ -117,16 +117,17 @@
             </div>
         </div>
         {{-- Examen Final --}}
-        @if (!is_null($publicacion->examen))
+     
+        @if (!is_null($exmenfinal) && $exmenfinal->is_visible==1)
             <div class="examensubir">
                 <h1>Examen final</h1>
                 <p>
-                    El Examen se debe resolver de forma total, teniendo en cuenta la fecha de cese de la activación
-                    de su cuenta.
-                    Antes de resolver el Examen se sugiere ver todos los videos del curso.
+                    El Examen se debe resolver de forma total.
+                    Antes de resolver el Examen se recomienda repasar todas los temas vistos en el curso.
+                    Pulsa el boton para iniciar el Examen.
                     <br><br>
                 </p>
-                <a href="#" class="btn-card p-2" style="text-decoration: none">Presentar Examen</a>
+                <a href="#" wire:click.prevent="darExamen({{$exmenfinal->id}})" class="btn-card p-2"  style="text-decoration: none">Ingresar al Examen </a>
             </div>
         @endif
 
@@ -228,19 +229,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="head_6">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapse_6" aria-expanded="true" aria-controls="collapse_6">
-                                ¿Serio habra classes presenciales?
-                            </button>
-                        </h2>
-                        <div id="collapse_6" class="accordion-collapse collapse" aria-labelledby="head_6">
-                            <div class="accordion-body">
-                                <p>No</p>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>

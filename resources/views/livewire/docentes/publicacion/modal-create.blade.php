@@ -71,7 +71,7 @@
                                     Peso de examen:
                                 </label>
                                 <input type="number" class="form-control" style="width: 65px" min="1"
-                                    max="5" required="">
+                                    max="5" wire:model="peso" required="">
                                 {{-- <input type="text" class="form-input" name="peso" id="peso" wire:model="peso"> --}}
                             </div>
 

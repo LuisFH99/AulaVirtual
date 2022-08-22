@@ -33,11 +33,12 @@ Route::middleware(['auth'])->group(function () {
     Route::view('/curso/tema/{idtema}', 'livewire.temas.index')->name('tema.index');
     Route::view('/curso/tarea/{idtarea}', 'livewire.tareas.index')->name('tarea.index');
     Route::view('/curso/tarea/{idtarea}/entrega/{idmatricula}', 'livewire.entregables.index')->name('entregable.index');
+    Route::view('/curso/examen/cuestionario', 'livewire.examen.index')->name('examen.index');
     //Route::get('/cursos',  function () {return view('web.cursos');});
 
     Route::view('/docente/cursos', 'livewire.docentes.cursos.index')->name('docentes.curso.index');
     Route::view('/docente/curso/{idpublicacion}', 'livewire.docentes.publicacion.index')->name('docentes.publicacion.index');
-    Route::view('/docente/cuestionario/{idexamen}', 'livewire.docentes.cuestionario.index')->name('docentes.cuestionario.index');
+    Route::view('/docente/examen/cuestionario', 'livewire.docentes.cuestionario.index')->name('docentes.cuestionario.index');
 
 
 
