@@ -1,73 +1,94 @@
-@extends('layouts.app')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
-                </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{ asset('icons/fontawesome-free-6.0.0-web/fontawesome-free-6.0.0-web/css/all.min.css') }}">
+    <link rel="icon" type="image/png" href="{{ asset('img/unasam-logo.png') }}">
+    <style>
+        @media(max-width:600px){
+            .img-contenido{
+                display: none;
+            }
+            .body{
+                overflow-y: visible;
+            }
+            input{
+                width: 100%
+            }
+            hr{
+                width: 100%
+            }
+        }
+    </style>
+</head>
+<body style="overflow-y: hidden">
+    <div class="row d-flex m-0">
+        <div class="col-sm-7 bg-white p-0 m-0 rounded  img-contenido">
+            <img src="{{ asset('img/4600166 - copia.jpg') }}" class="img-fluid p-0 m-0" alt="Imagen login" width="400" style="width: 90%;height:100%;">
+        </div>
+        <div class="col-sm-5 p-5 m-0 "> 
+            <div class="text-center">
+                <img src="{{ asset('img\logo-fundasam.png') }}" class="img-fluid imagen-login" width="100" alt="logo de la unasam">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </div>
+            <div class="align-self-center">
+                <h4 class="text-dark fw-bold mr-5 mt-4"> BIENVENIDO AL AULA VIRTUAL UNASAM</h4>
+                <small class="text-muted">Por favor, ingrese las credenciales correspodientes para iniciar sesion</small>
+            </div>
+            
+            <hr style=" border: 2px solid rgb(248, 249, 250); width: 85%"><!-- style="background: rgb(234, 239, 251) -->
+            <form method="POST" action="{{ route('login') }}" class="m-0">
+                @csrf
+                <div class="mb-4">
+                    <label for="email" class="col-md-4 col-form-label text-md-start fw-bold ">{{ __('Usuario:') }}</label>
+    
+                    <div class="col-md-10">
+                       <input id="email" type="email" class="username form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Ingrese su usuario">
+    
+                        @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+    
+                <div class=" mb-4">
+                    <label for="password" class="col-md-4 col-form-label text-md-start fw-bold ">{{ __('Contraseña:') }}</label>
+    
+                    <div class="col-md-10">
+                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Ingrese su contraseña"><br>
+    
+                        @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+    
+                <div class="mb-4">
+                    <div class="col-md-10 text-center">
+                        <div class="d-grid ">
+                            <button class="btn btn-primary " type="submit">Ingresar&nbsp;<i class="fa-solid fa-right-to-bracket"></i></button>
+                        </div>
+                        @if (Route::has('password.request'))
+                            <a class="btn btn-link text-muted" href="{{ route('password.request') }}" style="text-decoration: none">
+                                {{ __('¿Olvidaste tu contraseña?') }}
+                            </a>
+                        @endif
+                    </div>
+                    <hr style=" border: 2px solid rgb(248, 249, 250); width: 85%">
+
+                </div>
+            </form>
         </div>
     </div>
-</div>
-@endsection
+</body>
+</html>
+{{-- @endsection --}}
