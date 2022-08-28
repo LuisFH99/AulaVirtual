@@ -114,11 +114,11 @@
                                                                 </a>
                                                                 <i class="fas fa-minus-circle"
                                                                     style="color: red; font-size: 20px"
+                                                                    {{-- wire:click.prevent="$emit('confirmQuitarRecurso',{{ $recurso->id }})" --}}
                                                                     wire:click.prevent="eliminarRecurso({{ $recurso->id }})"></i>
                                                             </span>
                                                         @endforeach
                                                     </div>
-                                                    {{-- <a href="/CrearRecursos" class="btn btn-success btn-sm text-white">Insertar Recursos</a> --}}
                                                 </li>
                                             @endforeach
                                             <!-- seccion de tareas-->
@@ -172,8 +172,7 @@
                     Examen"</b> para empezar a crearlo.
                 <br><br>
             </p>
-            <button type="button" class="btn-card p-2"
-                wire:click.prevent="addExamenFinal()">Generar Examen</button>
+            <button type="button" class="btn-card p-2" wire:click.prevent="addExamenFinal()">Generar Examen</button>
             {{-- <a href="/Cuestionario" class="btn-card p-2" style="text-decoration: none">Generar Examen</a> --}}
         </div>
     </div>
@@ -197,3 +196,8 @@
     </div>
     @include('livewire.docentes.publicacion.modal-create')
 </div>
+<script>
+    window.onload = function() {
+        miNotificacion();
+    }
+</script>

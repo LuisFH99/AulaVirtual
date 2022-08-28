@@ -29,7 +29,7 @@
                         <span class="drop-zone__prompt">Suelte el archivo aquí o haga clic para cargar</span>
                         <input type="file" wire:model="doc_entrega" name="myFile" class="drop-zone__input" accept="application/pdf">
                     </div> --}}
-                <input type="file" class="form-control-file" wire:model="doc_entrega" accept='application/pdf' multiple>  
+                <input type="file" class="form-control-file" wire:model="doc_entrega" accept='.txt,.doc,.docx,.xlsx,.xls,.pptx,.ppt,,.pdf,.rar,.zip'>  
                 </div><br>
                 <div class="text-start">
                     <button type="button" wire:click="guardarEntregable" class="btn btn-primario">

@@ -53,13 +53,19 @@
                         <p>Archivos enviados</p>
                     </th>
                     <th>
-                        <p>{{ (is_null($entregable) ? 'Sin enviar' : is_null($entregable->ruta)) ? 'Sin enviar' : $entregable->ruta }}
-                            {{-- <p>tarea_01_modulo_01.pdf</p> --}}
+                        @if (!is_null($entregable))
+                            <a href="{{ asset($entregable->ruta) }}" download class="downloads__link">
+                                <i class="fas fa-download"></i>Documento Enviado</span></a>
+                        @endif
+                        <p>{{ is_null($entregable) ? 'Sin enviar' : '' }}</p>
                     </th>
                 </tr>
             </tbody>
         </table>
-        @if (is_null($entregable) && $tarea->fecha_entrega <= now())
+        {{-- @php
+            dd(date("Y-m-d"),$tarea->fecha_entrega >= now(),$tarea->fecha_entrega);
+        @endphp --}}
+        @if (is_null($entregable) && $tarea->fecha_entrega >= date('Y-m-d'))
             <a href="{{ route('entregable.index', ['idtarea' => $tarea->id, 'idmatricula' => $matricula->id]) }}"
                 class="btn btn-card mb-2">Entregar&nbsp;<i class="fa-solid fa-floppy-disk"></i></a>
             <p>

@@ -15,4 +15,8 @@ class Alternativa extends Model
         'pregunta_id'
     ];
     public $timestamps=false;
+
+    public function respuestas(){
+        return $this->belongsToMany(Resultados::class,'resultadorespuestas');
+    }
 }
