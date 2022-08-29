@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Entregable;
 use Livewire\Component;
 use App\Models\Tarea;
+use Illuminate\Support\Facades\Storage;
 use Livewire\WithFileUploads;
 
 class Entregables extends Component
@@ -31,10 +32,11 @@ class Entregables extends Component
         $tarea = Tarea::findOrFail($this->tarea_id);
         $directoryname=$tarea->modulo->publicacion->curso->nombre."_".$tarea->modulo->publicacion->id;
         if ($this->doc_entrega) { 
-            $filename=date("dmYhis")."-".$this->doc_entrega[0]->getClientOriginalName();
-            $directory=$this->doc_entrega[0]->storeAS('public/entregables/'.$directoryname,$filename);
+            $filename=date("dmYhis")."-".$this->doc_entrega->getClientOriginalName();
+            $directory=$this->doc_entrega->storeAS('public/' . $directoryname . '/entregables/',$filename);
+            $url = Storage::url($directory);
             $entegable=new Entregable();
-            $entegable->ruta=$directory;
+            $entegable->ruta=$url;
             $entegable->tarea_id=$this->tarea_id;
             $entegable->matricula_id=$this->matriculado_id;
             $entegable->save();

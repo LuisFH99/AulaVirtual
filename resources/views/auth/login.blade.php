@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{ asset('icons/fontawesome-free-6.0.0-web/fontawesome-free-6.0.0-web/css/all.min.css') }}">
-    <link rel="icon" type="image/png" href="{{ asset('img/unasam-logo.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('img/logo-fundasam.png') }}">
     <style>
         @media(max-width:650px){
             .img-contenido{
@@ -36,9 +36,9 @@
             <div class="text-center">
                 <img src="{{ asset('img\logo-fundasam.png') }}" class="img-fluid imagen-login" width="100" alt="logo de la unasam">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </div>
-            <div class="align-self-center">
-                <h4 class="text-dark fw-bold mr-5 mt-4"> BIENVENIDO AL AULA VIRTUAL UNASAM</h4>
-                <small class="text-muted">Por favor, ingrese las credenciales correspodientes para iniciar sesion</small>
+            <div class="align-self-center text-center">
+                <h4 class="text-dark fw-bold mr-5 mt-4 "> BIENVENIDO AL AULA VIRTUAL FUNDASAM</h4>
+                <small class="text-muted ">Por favor, ingrese sus credenciales para iniciar sesion</small>
             </div>
             
             <hr style=" border: 2px solid rgb(248, 249, 250); width: 85%"><!-- style="background: rgb(234, 239, 251) -->
@@ -77,11 +77,11 @@
                         <div class="d-grid ">
                             <button class="btn btn-primary " type="submit">Ingresar&nbsp;<i class="fa-solid fa-right-to-bracket"></i></button>
                         </div>
-                        @if (Route::has('password.request'))
+                        {{-- @if (Route::has('password.request'))
                             <a class="btn btn-link text-muted" href="{{ route('password.request') }}" style="text-decoration: none">
                                 {{ __('¿Olvidaste tu contraseña?') }}
                             </a>
-                        @endif
+                        @endif --}}
                     </div>
                     <hr style=" border: 2px solid rgb(248, 249, 250); width: 85%">
 

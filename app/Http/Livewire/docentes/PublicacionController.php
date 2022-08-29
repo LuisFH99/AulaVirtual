@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Docentes;
 
+use App\Models\Entregable;
 use App\Models\Examen;
 use Livewire\Component;
 use App\Models\Publicacion;
@@ -21,6 +22,31 @@ class PublicacionController extends Component
     public $moduloselect, $temaselect, $temaid, $moduloid;
     public $nombre, $fecha, $doc_recurso;
     public $duracion, $peso;
+    protected $listeners = ['eliminarRecurso', 'eliminarTarea'];
+
+    protected $rulesRecursos = [
+        'nombre' => 'required',
+        'doc_recurso' => 'required|max:5120',
+    ];
+    protected $rulesTarea = [
+        'nombre' => 'required',
+        'fecha' => 'required',
+        'doc_recurso' => 'max:5120',
+    ];
+
+    protected $rulesExamen = [
+        'duracion' => 'required',
+        'peso' => 'required',
+    ];
+
+    protected $msjError = [
+        'nombre.required' => 'Este campo es requerido',
+        'doc_recurso.required' => 'Debe subir un archivo como recurso',
+        'doc_recurso.max' => 'El tamaño maximo del archivo es 5MB',
+        'fecha.required' => 'Indicar fecha maxima de entrega',
+        'duracion.required' => 'Indicar la duracion del examen',
+        'peso.required' => 'Indicar el peso del examen'
+    ];
 
     public function mount()
     {
@@ -74,6 +100,7 @@ class PublicacionController extends Component
 
     public function guardarRecurso()
     {
+        $this->validate($this->rulesRecursos, $this->msjError);
         $directoryname = $this->nombre_curso . "_" . $this->publicacion_id;
         if ($this->doc_recurso) {
             $filename = date("dmYhis") . "-" . $this->nombre . "." . $this->doc_recurso->getClientOriginalExtension();
@@ -84,29 +111,45 @@ class PublicacionController extends Component
             $recurso->descripcion = $this->nombre;
             $recurso->temas_id = $this->temaid;
             $recurso->save();
+
+            $datos = [
+                'modo' => 'success',
+                'mensaje' => 'Nuevo recurso agregado'
+            ];
+            $this->emit('alertaSistema', $datos);
         }
+
         $this->cancelar();
     }
 
     public function guardarTarea()
     {
+        $this->validate($this->rulesTarea, $this->msjError);
+        $url = null;
         $directoryname = $this->nombre_curso . "_" . $this->publicacion_id;
         if ($this->doc_recurso) {
             $filename = date("dmYhis") . "-" . $this->doc_recurso->getClientOriginalExtension();
             $directory = $this->doc_recurso->storeAS('public/' . $directoryname . '/tareas', $filename);
             $url = Storage::url($directory);
-            $tarea = new Tarea();
-            $tarea->descripcion = $this->nombre;
-            $tarea->fecha_entrega = $this->fecha;
-            $tarea->ruta_archivo = $url;
-            $tarea->modulos_id = $this->moduloid;
-            $tarea->save();
         }
+        $tarea = new Tarea();
+        $tarea->descripcion = $this->nombre;
+        $tarea->fecha_entrega = $this->fecha;
+        $tarea->ruta_archivo = $url;
+        $tarea->modulos_id = $this->moduloid;
+        $tarea->save();
+
+        $datos = [
+            'modo' => 'success',
+            'mensaje' => 'La Agrego nueva tarea'
+        ];
+        $this->emit('alertaSistema', $datos);
         $this->cancelar();
     }
 
     public function guardarExamen()
     {
+        $this->validate($this->rulesExamen, $this->msjError);
         $test = new Examen();
         $test->tiempo = $this->duracion;
         $test->peso = $this->peso;
@@ -114,18 +157,48 @@ class PublicacionController extends Component
         $test->is_final = 1;
         $test->is_visible = 0;
         $test->save();
+        $datos2 = [
+            'modo' => 'warning',
+            'mensaje' => 'Ingrese al Examen para Agregar Preguntas'
+        ];
+        $this->emit('alertaSistema', $datos2);
+        $datos = [
+            'modo' => 'success',
+            'mensaje' => 'Se Genero Nuevo Examen'
+        ];
+        $this->emit('alertaSistema', $datos);
         $this->cancelar();
     }
 
     public function eliminarRecurso($id)
     {
-        $recurso = RecursosModulo::find($id);
-        $recurso->delete();
+        $ruta = str_replace('storage', 'public', RecursosModulo::where('id', $id)->value('ruta'));
+        Storage::delete($ruta);
+        RecursosModulo::destroy($id);
+        $datos = [
+            'modo' => 'success',
+            'mensaje' => 'Recurso Eliminado'
+        ];
+        $this->emit('alertaSistema', $datos);
+
     }
 
     public function eliminarTarea($id)
     {
-        $tarea = Tarea::find($id);
-        $tarea->delete();
+        if (Entregable::where('tarea_id', $id)->exists()) {
+            $datos = [
+                'modo' => 'error',
+                'mensaje' => 'Existen Entregas, ¡No se puede Eliminar!'
+            ];
+            $this->emit('alertaSistema', $datos);
+        } else {
+            Tarea::destroy($id);
+            $datos = [
+                'modo' => 'success',
+                'mensaje' => 'Tarea Eliminada'
+            ];
+            $this->emit('alertaSistema', $datos);
+        }
+
     }
 }

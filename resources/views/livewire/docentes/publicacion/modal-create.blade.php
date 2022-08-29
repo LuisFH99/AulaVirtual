@@ -20,13 +20,21 @@
                             Titulo o Nombre:
                         </label>
                         <input type="text" class="form-input" name="nombre" id="nombre" wire:model="nombre">
+                        @error('nombre')
+                            <br>
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
                     </div>
                     <div>
                         <label class="form-label mt-4">
                             <i class="fa-solid fa-folder" style="font-size: 20px"></i> Archivo del material
                         </label>
-                        <input type="file" class="form-control-file" wire:model="doc_recurso"
-                            accept='application/pdf'>
+                        <input type="file" class="form-control-file" wire:model="doc_recurso" id="uploadedfile"
+                            accept='.doc,.docx,.txt,.pdf,image/*'>
+                        @error('doc_recurso')
+                            <br>
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
                     </div>
                     {{-- <div class="drop-zone mt-2">
                         <i class="icon fa-solid fa-cloud-arrow-up"></i>
@@ -65,6 +73,9 @@
                                 </label>
                                 <input type="text" class="form-control" name="duracion" id="duracion"
                                     wire:model="duracion" style="width: 65px">
+                                @error('duracion')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
                             <div>
                                 <label class="form-label">
@@ -72,6 +83,9 @@
                                 </label>
                                 <input type="number" class="form-control" style="width: 65px" min="1"
                                     max="5" wire:model="peso" required="">
+                                @error('peso')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
                                 {{-- <input type="text" class="form-input" name="peso" id="peso" wire:model="peso"> --}}
                             </div>
 
@@ -102,20 +116,31 @@
                         <label class="form-label">
                             Añade una descripcion:
                         </label>
-                        <input type="text" class="form-input" name="nombre" id="nombre" wire:model="nombre">
+                        <textarea class="form-control" wire:model="nombre" cols="50" placeholder="Descripcion de Tarea"
+                            id="floatingTextarea" style="height: 10vh" required></textarea>
+                        @error('nombre')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                        {{-- <input type="text" class="form-input" name="nombre" id="nombre" wire:model="nombre"> --}}
                     </div>
-                    <div>
+
+                    <div class="mt-2">
                         <label class="form-label">
                             Designa ultima fecha de entrega:
                         </label>
-                        <input class="form-input-fecha" type="date" name="fecha" id="fecha" required>
+                        <input class="form-input-fecha" type="date" name="fecha" id="fecha"
+                            wire:model="fecha" required>
+                        @error('fecha')
+                            <br>
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
                     </div>
-                    <div>
-                        <label class="form-label mt-4">
+                    <div class="mt-2">
+                        <label class="form-label">
                             <i class="fa-solid fa-folder" style="font-size: 20px"></i> Añade un documento:
                         </label>
-                        <input type="file" class="form-control-file" wire:model="doc_recurso"
-                            accept='application/pdf'>
+                        <input type="file" class="form-control-file" wire:model="doc_recurso" id="uploadedfile"
+                            accept='.doc,.docx,.txt,.pdf,image/*'>
                     </div>
                     {{-- <div class="drop-zone mt-2">
                         <i class="icon fa-solid fa-cloud-arrow-up"></i>
@@ -138,3 +163,13 @@
 @if ($vermodal)
     <div class="modal-backdrop fade show"></div>
 @endif
+<script>
+    function miNotificacion() {
+        Livewire.on('alertaSistema', function(datos) {
+            $(document).ready(() => {
+                toastr[datos.modo](datos.mensaje, "Mensaje del Sistema");
+            });
+            document.getElementById("uploadedfile").value = "";
+        });
+    }
+</script>
