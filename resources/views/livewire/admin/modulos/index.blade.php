@@ -1,33 +1,40 @@
 @extends('adminlte::page')
 
-{{-- @section('title', 'Cursos') --}}
+{{-- @section('title', 'Publicaciones') --}}
 
 @section('content_header')
-    <div class="d-flex justify-content-center">
-        <h3 class="font-weight-bold mt-2 ">GESTION DE CURSOS</h3>
+    <div class="d-flex justify-content-center ">
+        <h3 class="font-weight-bold mt-2 mb-0">GESTION DE MODULOS</h3>
     </div>
 @stop
 
 @section('content')
-    <livewire:admin.curso-controller />
-@stop 
+    <livewire:admin.modulo-controller />
+@stop
 
 @section('css')
     {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
 @stop
 
 @section('js')
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     window.addEventListener('show-add', event =>{
-        $('#add').modal('show');
-    })
-    
+             $('#add').modal('show');
+            })
+                
     window.addEventListener('hide-add', event =>{
-        $('#add').modal('hide');
-    })
+            $('#add').modal('hide');
+            })
 
+    window.addEventListener('show-addTema', event =>{
+             $('#addTema').modal('show');
+            })
+                
+    window.addEventListener('hide-addTema', event =>{
+            $('#addTema').modal('hide');
+            })
     function Confirm(id){
         Swal.fire({
         title: 'Confirmar',

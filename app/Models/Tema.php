@@ -13,7 +13,8 @@ class Tema extends Model
     protected $fillable = [
         'descripcion',
         'acceso',
-        'fecha'
+        'fecha',
+        'modulos_id'
     ];
     public $timestamps = false;
 
