@@ -38,6 +38,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::view('/docente/cursos', 'livewire.docentes.cursos.index')->name('docentes.curso.index');
     Route::view('/docente/curso/{idpublicacion}', 'livewire.docentes.publicacion.index')->name('docentes.publicacion.index');
+    Route::view('/docente/entrega/tarea/{idtarea}', 'livewire.docentes.entregas.index')->name('docentes.entregas.index');
     Route::view('/docente/examen/cuestionario', 'livewire.docentes.cuestionario.index')->name('docentes.cuestionario.index');
 
 

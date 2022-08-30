@@ -10,11 +10,12 @@
         <h1>{{ $publicacion->curso->nombre }}</h1>
         <h3>{{ $publicacion->tipopublicacion->tipo }}</h3>
         <div class="profesor">
-            <img src="https://aula.enppeduca.com/images/profiles/1647900951.jpeg" alt="">
+            {{-- <img src="https://aula.enppeduca.com/images/profiles/1647900951.jpeg" alt=""> --}}
+            <img src="{{ asset('img/tutor.png') }}" alt="">
             <div class="description">
                 @if ($publicacion->publicaciondocente->count() > 0)
                     @foreach ($publicacion->publicaciondocente as $docente)
-                        <p><a href="#">{{ ucwords($docente->datos->fullname()) }}</a></p>
+                        <p><a href="#">{{ $docente->datos->fullname() }}</a></p>
                         <p>{{ ucwords($docente->especialidad) }}</p>
                     @endforeach
 
@@ -79,13 +80,7 @@
                                                         <a href="{{ $modulo->link }}"
                                                             class="btn btn-primary btn-sm text-white">Ingresar Link </a>
                                                     </span>
-                                                    {{-- <a href="/CrearRecursos" class="py-2 px-5"
-                                                        title="Click para editar">
-                                                        <img class="fluid-img" src="{{ asset('img/img_tarea.svg') }}"
-                                                            width="20" alt="">&nbsp;Descripcion
-                                                    </a> --}}
                                                 </div>
-                                                {{-- <a href="/CrearClase" class="btn btn-primary btn-sm text-white">Insertar Link </a> --}}
                                             </li>
                                             @foreach ($modulo->temas as $tema)
                                                 <li>
@@ -137,16 +132,17 @@
                                                     @foreach ($modulo->tareas as $key => $tarea)
                                                         @if ($modulo->id == $tarea->modulos_id)
                                                             <span>
-                                                                <a href="{{ asset($tarea->ruta_archivo) }}"
-                                                                    class="py-2 px-5" download>
+                                                                <a href="{{ route('docentes.entregas.index',$tarea->id) }}"
+                                                                    class="py-2 px-5">
                                                                     <img class="fluid-img"
                                                                         src="{{ asset('img/img_tarea.svg') }}"
                                                                         width="25"
                                                                         alt="">&nbsp;Tarea_{{ $key + 1 }}
                                                                 </a>
-                                                                <i class="fas fa-minus-circle"
+                                                                <i class="fas fa-minus-circle "
                                                                     style="color: red; font-size: 20px"
                                                                     wire:click.prevent="eliminarTarea({{ $tarea->id }})"></i>
+                                                                {{-- <i class="fa-solid fa-eye primary mr-4" style="font-size: 20px"></i> --}}
                                                             </span>
                                                         @endif
                                                     @endforeach

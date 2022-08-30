@@ -2,7 +2,7 @@
     <div class="col-md-12 px-0">
         <div class="slider"
             style="background-image: url('https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')">
-            <h1>{{ $publicacion->curso->nombre }}</h1>
+            <h1>{{ ucwords($publicacion->curso->nombre) }}</h1>
         </div>
     </div>
     {{-- Descripcion del curso --}}
@@ -10,12 +10,13 @@
         <h1>{{ $publicacion->curso->nombre }}</h1>
         <h3>{{ $publicacion->tipopublicacion->tipo }}</h3>
         <div class="profesor">
-            <img src="https://aula.enppeduca.com/images/profiles/1647900951.jpeg" alt="">
+            {{-- <img src="https://aula.enppeduca.com/images/profiles/1647900951.jpeg" alt=""> --}}
+            <img src="{{asset('img/tutor.png')}}" alt="">
             <div class="description">
                 @if ($publicacion->publicaciondocente->count() > 0)
                     @foreach ($publicacion->publicaciondocente as $docente)
                         <p><a href="#">{{ $docente->datos->fullname() }}</a></p>
-                        <p>{{ $docente->especialidad }}</p>
+                        <p>{{ ucwords($docente->especialidad) }}</p>
                     @endforeach
 
                 @endif
@@ -36,7 +37,7 @@
                         Sans", Helvetica, sans-serif;">
                         <p style="margin-bottom: 30px; -webkit-font-smoothing: antialiased;">
                             <span style="font-weight: inherit; -webkit-font-smoothing: antialiased;">
-                                {{ $publicacion->curso->descripcion }} </span>
+                                {{ ucfirst($publicacion->curso->descripcion) }} </span>
                         </p><br>
                     </h3>
                     <h3 class="font-weight-bold "
@@ -46,7 +47,7 @@
                         style="margin-bottom: 30px; -webkit-font-smoothing: antialiased; padding-top: 1rem !important;">
                     </p>
                     <p style="margin-bottom: 30px; -webkit-font-smoothing: antialiased;">
-                        {{ $publicacion->curso->subdescripcion }}
+                        {{ ucfirst($publicacion->curso->subdescripcion) }}
                     </p>
                 </div>
             </div>
@@ -76,11 +77,30 @@
                                     aria-labelledby="panel_{{ $modulo->id }}">
                                     <div class="accordion-body">
                                         <ul class="sesiones">
+                                            <li>
+                                                <a href="{{ !is_null($modulo->link) ? $modulo->link : '#' }}">
+                                                    <i class="fa-solid fa-paperclip"
+                                                        style="color: black; font-size: 21px"></i>
+                                                    Link de clase
+                                                    <a href="{{ $modulo->link }}"
+                                                        class="btn btn-primary btn-sm text-white">Ingresar</a>
+                                                </a>
+                                                {{-- <div class="d-flex align-items-start flex-column bd-highlight mb-3"> --}}
+                                                {{-- <span>
+                                                    <i class="fa-solid fa-paperclip"
+                                                        style="color: black; font-size: 21px"></i>&nbsp;Link
+                                                    clases&nbsp;
+                                                    <a href="{{ $modulo->link }}"
+                                                        class="btn btn-primary btn-sm text-white">Ingresar</a>
+                                                </span> --}}
+                                                {{-- </div> --}}
+                                            </li>
                                             @foreach ($modulo->temas as $tema)
                                                 <li>
                                                     <a
                                                         href="{{ $tema->recursos->count() > 0 ? route('tema.index', $tema->id) : '#' }}">
-                                                        <i class="fa fa-play-circle"></i>
+                                                        <i class="fa fa-play-circle"
+                                                            style="color: black; font-size: 21px"></i>
                                                         {{ $tema->descripcion }}
                                                         @if ($tema->recursos->count() > 0)
                                                             <button class="ver">Ver</button>
@@ -117,8 +137,8 @@
             </div>
         </div>
         {{-- Examen Final --}}
-     
-        @if (!is_null($exmenfinal) && $exmenfinal->is_visible==1)
+
+        @if (!is_null($exmenfinal) && $exmenfinal->is_visible == 1)
             <div class="examensubir">
                 <h1>Examen final</h1>
                 <p>
@@ -127,7 +147,8 @@
                     Pulsa el boton para iniciar el Examen.
                     <br><br>
                 </p>
-                <a href="#" wire:click.prevent="darExamen({{$exmenfinal->id}})" class="btn-card p-2"  style="text-decoration: none">Ingresar al Examen </a>
+                <a href="#" wire:click.prevent="darExamen({{ $exmenfinal->id }})" class="btn-card p-2"
+                    style="text-decoration: none">Ingresar al Examen </a>
             </div>
         @endif
 
@@ -229,7 +250,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
         </div>

@@ -22,6 +22,6 @@ class Persona extends Model
 
 
     public function fullName(){
-        return "{$this->apellidos} {$this->nombres}" ;
+        return ucwords("{$this->apellidos} {$this->nombres}") ;
     }
 }
