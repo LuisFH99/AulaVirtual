@@ -2,56 +2,53 @@
 
 namespace App\Http\Livewire\Admin;
 
-use App\Models\Categoria;
 use App\Models\Curso;
+use App\Models\Modulo;
 use App\Models\Publicacion;
+use App\Models\Tema;
 use Livewire\Component;
-use Livewire\WithPagination;
 
-class CursoController extends Component{
-    use WithPagination;
-    public $id_curso, $nombre, $descripcion, $subdescripcion, $categoria_id;
-    public $categorias;
+class ModuloController extends Component{
+    public $id_modulo, $link, $nombre, $publicacion_id, $curso;
+    public $id_curso,$modulos_id,$temas;
     protected $listeners=['deleteRow' => 'delete'];
-    protected $paginationTheme = 'bootstrap';
 
     public function render(){
-        $this->categorias=Categoria::orderBy('id','desc')->get();
-        $cursos=Curso::orderBy('id','desc')->paginate(10);
-        return view('livewire.admin.cursos.view',compact('cursos'));
+        
+        $this->publicacion_id = (session()->get('idpublicacion'));
+        $this->temas=Tema::where('modulos_id',$this->modulos_id)->get();
+        $publicacion=Publicacion::findOrFail($this->publicacion_id);
+        $this->id_curso=$publicacion->cursos_id;
+        $this->curso=Curso::where('id',$this->id_curso)->get();
+        return view('livewire.admin.modulos.view',compact('publicacion'));
     }
 
     public function addNew(){
         $this->dispatchBrowserEvent('show-add');
         $this->limpiar();
     }
+
     public function save(){
         //validaciones
         $rules = [
-            'nombre' => "required|unique:cursos,nombre,{$this->id_curso}",
-            'descripcion' => "required",
-            'subdescripcion' => "required",
-            'categoria_id' => "required"
+            'nombre' => "required",
+            'link' => "required",
         ];
 
         $messages = [
             'nombre.required' => 'Campo requerido',
-            'nombre.unique' => 'El nombre ya existe',
-            'descripcion.required' => 'Campo requerido',
-            'subdescripcion.required' => 'Campo requerido',
-            'categoria_id.required' => 'Campo requerido',
+            'link.required' => 'Campo requerido',
         ];
     
         $this->validate($rules,$messages);
 
-        Curso::updateorCreate(['id' => $this->id_curso],
-        ['nombre' =>$this->nombre ,
-        'descripcion'=>$this->descripcion,
-        'subdescripcion'=>$this->subdescripcion,
-        'categoria_id' => $this->categoria_id
+        Modulo::updateorCreate(['id' => $this->id_modulo],
+        ['nombre' =>$this->nombre,
+        'link'=>$this->link,
+        'publicacion_id'=>$this->publicacion_id
         ]); 
-      
-        if ($this->id_curso > 0) {
+
+        if ($this->id_modulo > 0) {
             $msj = [
                 'modo' => 'bg-success',
                 'mensaje' => 'Actualizacion Exitosa'
@@ -66,23 +63,20 @@ class CursoController extends Component{
         $this->limpiar();
         $this->dispatchBrowserEvent('hide-add');
         $this->emit('notify', $msj); 
-
-
     }
  
     public function edit($id){
         $this->limpiar();
-        $cursos = Curso::findOrFail($id); 
-        $this->id_curso=$id;
-        $this->nombre=$cursos->nombre;
-        $this->descripcion=$cursos->descripcion;
-        $this->subdescripcion=$cursos->subdescripcion;
-        $this->categoria_id=$cursos->categoria_id;
+        $modulos = Modulo::findOrFail($id); 
+        $this->id_modulo=$id;
+        $this->nombre=$modulos->nombre;
+        $this->link=$modulos->link;
         $this->dispatchBrowserEvent('show-add');
     }
 
-    public function delete (Curso $curso){
-        if (Publicacion::Where('cursos_id',"{$curso->id}")->count()>0){  
+    public function delete (Modulo $modulo){
+
+        if (Tema::Where('modulos_id',"{$modulo->id}")->count()>0){  
             $msj = [
                 'modo' => 'bg-danger',
                 'mensaje' => 'Error! El elemento esta en uso'
@@ -93,8 +87,8 @@ class CursoController extends Component{
                 'modo' => 'bg-success',
                 'mensaje' => 'Eliminacion Exitosa'
             ];
-            $curso->delete();
-            $this->resetPage();
+            $modulo->delete();
+            $this->limpiar();
             $this->emit('notify', $msj); 
         }
     }
@@ -108,4 +102,12 @@ class CursoController extends Component{
         $this->resetPage();
     } 
 
+    public function getTemas($id){
+        $this->modulos_id=$id;
+        session(['idmodulo' => $id]);
+    }
+
+    public function temas(){
+        return redirect()->route('admin.temas.index');
+    }
 }

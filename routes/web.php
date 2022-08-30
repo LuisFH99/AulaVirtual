@@ -49,6 +49,8 @@ Route::middleware(['auth'])->group(function () {
     Route::view('/gestion/cursos', 'livewire.admin.cursos.index')->name('admin.cursos.index');
     Route::view('/gestion/publicaciones', 'livewire.admin.publicaciones.index')->name('admin.publicaciones.index');
     Route::view('/gestion/matriculados', 'livewire.admin.matricula.index')->name('admin.matricula.index');
+    Route::view('/gestion/modulos', 'livewire.admin.modulos.index')->name('admin.modulos.index');
+    Route::view('/gestion/temas', 'livewire.admin.temas.index')->name('admin.temas.index');
 });
 
 

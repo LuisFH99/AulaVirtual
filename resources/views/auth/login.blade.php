@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{{ asset('icons/fontawesome-free-6.0.0-web/fontawesome-free-6.0.0-web/css/all.min.css') }}">
     <link rel="icon" type="image/png" href="{{ asset('img/logo-fundasam.png') }}">
     <style>
-        @media(max-width:600px){
+        @media(max-width:650px){
             .img-contenido{
                 display: none;
             }
@@ -45,7 +45,7 @@
             <form method="POST" action="{{ route('login') }}" class="m-0">
                 @csrf
                 <div class="mb-4">
-                    <label for="email" class="col-md-4 col-form-label text-md-start fw-bold ">{{ __('Usuario:') }}</label>
+                    <label for="email" class="col-md-4 col-form-label text-sm-start fw-bold ">{{ __('Usuario:') }}</label>
     
                     <div class="col-md-10">
                        <input id="email" type="email" class="username form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Ingrese su usuario">

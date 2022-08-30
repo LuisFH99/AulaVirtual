@@ -1,16 +1,16 @@
 @extends('adminlte::page')
 
-{{-- @section('title', 'Cursos') --}}
+{{-- @section('title', 'Publicaciones') --}}
 
 @section('content_header')
-    <div class="d-flex justify-content-center">
-        <h3 class="font-weight-bold mt-2 ">GESTION DE CURSOS</h3>
+    <div class="d-flex justify-content-center ">
+        <h3 class="font-weight-bold mt-2 mb-0 ">GESTION DE TEMAS</h3>
     </div>
 @stop
 
 @section('content')
-    <livewire:admin.curso-controller />
-@stop 
+    <livewire:admin.tema-controller />
+@stop
 
 @section('css')
     {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}

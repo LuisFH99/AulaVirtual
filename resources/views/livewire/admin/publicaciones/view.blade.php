@@ -34,9 +34,13 @@
                                 class="btn btn-success btn-sm mr-1">
                                 <i class="fas fa-eye"></i>
                             </a>
+                            <a class="btn btn-primary btn-sm mr-1" title="Gestion de modulos" wire:click="modulos({{ $publicacion->id }})">
+                                <i class="fas fa-info-circle"></i>
+                            </a>
                             <a class="btn btn-info btn-sm" wire:click="matricula({{ $publicacion->id }})">
                                 <i class="fas fa-clipboard-list"></i>
                             </a>
+                           
                             {{-- <button type="button" class="btn btn-info btn-sm">
                                    <i class="fas fa-clipboard-list"></i>
                                </button> --}}

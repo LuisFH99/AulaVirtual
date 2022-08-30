@@ -13,12 +13,16 @@ class PublicacionesController extends Component
         return view('livewire.admin.publicaciones.view', compact('publicaciones'));
     }
 
-    public function matricula($idpublicacion)
-    {
+    public function matricula($idpublicacion){
         // dd($idpublicacion);
 
         session(['idpublicacion' => $idpublicacion]);
 
         return redirect()->route('admin.matricula.index');
+    }
+
+    public function modulos($id){
+        session(['idpublicacion' => $id]);
+        return redirect()->route('admin.modulos.index');
     }
 }
