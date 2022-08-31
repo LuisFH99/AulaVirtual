@@ -1,18 +1,13 @@
 <div id="accordion">
-    {{-- <div class="form-group row ">
-       <div class="input-group rounded col-md-9 mt-2">
-           <label for="" class="col-md-3 col-form-label">Buscar
-               Entidad:</label>
-           <input type="search" wire:model="buscar"
-               class="form-control rounded d-flex" placeholder="Buscar"
-               aria-label="Search" aria-describedby="search-addon" />
-           <div class="input-group-append">
-               <span class="input-group-text border-0" id="search-addon">
-                   <i class="fas fa-search"></i>
-           </div>
-           </span>
-       </div>
-   </div> --}}
+    <div class="form-group row ">
+        <div class="input-group rounded col-md-9 mt-2">
+            <label for="" class="col-form-label mr-2">Crear Nueva Publicacion:</label>
+            <button type="button" class="btn btn-info" title="Crear Nuea publicacion" wire:click.prevent="addNew">
+                <i class="fas fa-plus-circle mr-1"></i>Nuevo</button>
+        </div>
+        @include('livewire.admin.publicaciones.create')
+    </div>
+
     @if (count($publicaciones) > 0)
         @foreach ($publicaciones as $publicacion)
             <div class="card ">
@@ -71,6 +66,7 @@
                                         Imagen</th>
                                     <th scope="col" style="width: 100px; vertical-align:middle; text-align: center;">
                                         N° Estudiantes</th>
+                                    <th scope="col" style="vertical-align:middle; text-align: center;">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -85,7 +81,7 @@
                                         {{ $publicacion->horas }}</td>
                                     <td style="vertical-align: middle; text-align: center;">
                                         {{ $publicacion->nota_minima }}</td>
-                                    </td>
+                                    </td> 
                                     <td style="vertical-align: middle; text-align: center;">
                                         {{ $publicacion->nivelpublicacion->nivel }}</td>
                                     </td>
@@ -93,12 +89,24 @@
                                         {{ $publicacion->tipopublicacion->tipo }}</td>
                                     </td>
                                     <td style="vertical-align: middle; text-align: center;">
-                                        <img src="{{ $publicacion->rutaimg }}" alt="" class="img-thumbnail">
+                                        <img src="{{ asset('storage/img/'.$publicacion->rutaimg) }}" alt="Imagen de la publicacion" class="img-thumbnail">
                                     </td>
+
                                     <td style="vertical-align: middle; text-align: center;">
                                        {{ $publicacion->matriculados->count()}}
                                    </td>
-
+                                   <td style="vertical-align: middle; text-align: center;">
+                                        <div class="d-flex justify-content-center">
+                                            <button type="button" class="btn btn-info btn-sm mr-1"
+                                                wire:click.prevent="edit ({{$publicacion->id}})">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-danger btn-sm"
+                                                onclick="Confirm('{{$publicacion->id}}')"> 
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
+                                        </div>
+                                   </td> 
                                 </tr>
                             </tbody>
                         </table>
@@ -106,9 +114,9 @@
                 </div>
             </div>
         @endforeach
-        {{-- <div class="col-12 d-flex justify-content-center">
-            {{ $entidades->links() }}
-        </div> --}}
+        <div class="col-12 d-flex justify-content-start">
+            {{ $publicaciones->links() }}
+        </div>
     @else
         <div class="d-flex justify-content-center">
             <div class="card col-7">
@@ -120,3 +128,20 @@
     @endif
 
 </div>
+<script>
+    function Notificacion() {
+        Livewire.on('notify', function(datos) {
+            $(document).Toasts('create', {
+                class: datos.modo,
+                title: 'Mensaje de Sistema',
+                body: datos.mensaje,
+                autohide: true,
+                delay: 2000
+            })
+        });
+
+    }
+    window.onload = function() {
+        Notificacion();
+    }
+</script>

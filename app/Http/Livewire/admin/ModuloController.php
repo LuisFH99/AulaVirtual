@@ -7,7 +7,7 @@ use App\Models\Modulo;
 use App\Models\Publicacion;
 use App\Models\Tema;
 use Livewire\Component;
-
+ 
 class ModuloController extends Component{
     public $id_modulo, $link, $nombre, $publicacion_id, $curso;
     public $id_curso,$modulos_id,$temas;

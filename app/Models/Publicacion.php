@@ -17,9 +17,10 @@ class Publicacion extends Model
         'fecha_inicio_matricula',
         'fecha_fin_matricula',
         'horas',
-        'curso_id',
+        'cursos_id',
         'niveles_id',
-        'docentes_id'
+        'docentes_id',
+        'tipopublicacion_id'
     ];
     public $timestamps = false;
 

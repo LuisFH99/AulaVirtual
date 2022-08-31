@@ -45,7 +45,6 @@
                     <th scope="col">#</th>
                     <th scope="col">Descripcion</th>
                     <th scope="col" style="width: 150px">Fecha</th>
-                    <th scope="col">Acción</th>
                 </tr>
             </thead> 
             <tbody>
@@ -59,18 +58,7 @@
                         <td style="vertical-align: middle" class="text-uppercase text-center">
                             {{$t->descripcion}}</td>
                         <td style="vertical-align: middle" class="text-center">
-                            {{$t->fecha}}</td>
-                        <td style="vertical-align: middle;" class="text-center">
-                            <div class="d-flex justify-content-center">
-                                <button type="button" class="btn btn-info btn-sm mr-1"
-                                    wire:click.prevent="edit ({{$t->id}})">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button type="button" class="btn btn-danger btn-sm"
-                                    onclick="Confirm('{{$t->id}}')"> 
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </div>
+                            {{$t->fecha}}
                         </td>
                     </tr>
                 @endforeach
