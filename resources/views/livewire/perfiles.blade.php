@@ -43,8 +43,8 @@
         <div class="information sombrita">
             <div class="tit"><h3>Datos Personales:</h3></div>
             <ul>
-                <li><p>Nombres: <span>{{$u->nombre}}</span></p></li>
-                <li><p>Apellidos: <span>{{$u->apep}} {{$u->apem}}</span></p></li>
+                <li><p>Nombres: <span>{{$u->nombres}}</span></p></li>
+                <li><p>Apellidos: <span>{{$u->apellidos}}</span></p></li>
                 <li class=""><p>Número de documento: <span>{{$u->dni}}</span></p></li>
                 <li class=""><p>Fecha de nacimiento: <span>{{$u->fechNac}}</span></p></li>
                 <li class="description d-none"><p>Descripción: <span></span></p></li>

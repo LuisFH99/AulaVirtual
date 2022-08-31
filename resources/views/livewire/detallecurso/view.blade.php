@@ -78,12 +78,12 @@
                                     <div class="accordion-body">
                                         <ul class="sesiones">
                                             <li>
-                                                <a href="{{ !is_null($modulo->link) ? $modulo->link : '#' }}">
+                                                <a href="{{ !is_null($modulo->link) ? $modulo->link : '#' }}" target="_blank">
                                                     <i class="fa-solid fa-paperclip"
                                                         style="color: black; font-size: 21px"></i>
                                                     Link de clase
                                                     <a href="{{ $modulo->link }}"
-                                                        class="btn btn-primary btn-sm text-white">Ingresar</a>
+                                                        class="btn btn-primary btn-sm text-white" target="_blank">Ingresar</a>
                                                 </a>
                                                 {{-- <div class="d-flex align-items-start flex-column bd-highlight mb-3"> --}}
                                                 {{-- <span>

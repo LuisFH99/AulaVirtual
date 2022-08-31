@@ -8,7 +8,7 @@
                         <div class="item">
                             <div class="slider"
                                 style="background-image: url('https://images.pexels.com/photos/8199166/pexels-photo-8199166.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')">
-                                <h1>Floro en construccion</h1>
+                                <h1>Aula Virtual de la FUNDASAM</h1>
                             </div>
                         </div>
                     </div>

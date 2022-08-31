@@ -78,7 +78,7 @@
                                                             style="color: black; font-size: 25px"></i>&nbsp;Link
                                                         clases&nbsp;
                                                         <a href="{{ $modulo->link }}"
-                                                            class="btn btn-primary btn-sm text-white">Ingresar Link </a>
+                                                            class="btn btn-primary btn-sm text-white" target="_blank">Ingresar Link </a>
                                                     </span>
                                                 </div>
                                             </li>
