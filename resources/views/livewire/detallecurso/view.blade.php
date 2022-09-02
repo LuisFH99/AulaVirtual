@@ -193,12 +193,12 @@
                         <h2 class="accordion-header" id="head_2">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#collapse_2" aria-expanded="true" aria-controls="collapse_2">
-                                ¿Cuál es la cantidad de preguntas mínimas que debo responder para aprobar?
+                                ¿Cuál es la nota mínima para aprbar?
                             </button>
                         </h2>
                         <div id="collapse_2" class="accordion-collapse collapse" aria-labelledby="head_2">
                             <div class="accordion-body">
-                                <p>Es 8 preguntas, siendo su nota mínima 16.</p>
+                                <p> Para aprobar debe obterner una nota mínima de {{$publicacion->nota_minima}}.</p>
                             </div>
                         </div>
                     </div>
@@ -212,13 +212,13 @@
                         <div id="collapse_3" class="accordion-collapse collapse" aria-labelledby="head_3">
                             <div class="accordion-body">
                                 <p>
-                                    No, en caso obtenga una nota menor a 16 el sistema le permitirá rendir su
-                                    examen de nuevo.
+                                    No, en caso obtenga una nota menor a {{$publicacion->nota_minima}} el sistema le permitirá rendir su
+                                    examen de nuevo, un máximo de 3 veces.
                                 </p>
                             </div>
                         </div>
                     </div>
-                    <div class="accordion-item">
+                    {{-- <div class="accordion-item">
                         <h2 class="accordion-header" id="head_4">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#collapse_4" aria-expanded="true" aria-controls="collapse_4">
@@ -233,7 +233,7 @@
                                 </p>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="head_5">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
