@@ -31,13 +31,12 @@ class TemaController extends Component{
     public function save(){
         //validaciones
         $rules = [
-            'descripcion' => "required|unique:temas,descripcion,{$this->id_tema}",
+            'descripcion' => "required",
             'fecha' => "required",
         ];
 
         $messages = [
             'descripcion.required' => 'Campo requerido',
-            'descripcion.unique' => 'La descripcion ya existe',
             'fecha.required' => 'Campo requerido',
         ];
     

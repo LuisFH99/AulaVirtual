@@ -67,7 +67,7 @@
             </div>
             <ul>
                 <li class="">
-                    <p>Dirección: <span>Avenida Peru al costado de la otra Avenida</span></p>
+                    <p>Dirección: <span>-</span></p>
                 </li>
                 {{-- <li>
                     <p>País: <span>PERÚ</span></p>

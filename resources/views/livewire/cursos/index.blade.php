@@ -7,7 +7,7 @@
                     <div id="carousel-slider" class="owl-carousel">
                         <div class="item">
                             <div class="slider"
-                                style="background-image: url('https://images.pexels.com/photos/8199166/pexels-photo-8199166.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')">
+                                style="background-image: url('{{asset('img/portada.png')}}')">
                                 <h1>Aula Virtual de la FUNDASAM</h1>
                             </div>
                         </div>

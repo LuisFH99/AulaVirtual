@@ -2,8 +2,7 @@
     <div class="col-md-10 sesion_left">
         <div class='embed-container'>
             <div style="align-content: center">
-                <iframe id="iframe_vimeo"
-                    src="{{$linkvideo}}"
+                <iframe id="iframe_vimeo" src="{{ $linkvideo }}"
                     style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0"
                     allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
                 </iframe>
@@ -16,7 +15,7 @@
                 {{-- <video style="position:absolute;top:0;left:0;width:100%;height:100%;" controls autoplay>
                     <source src="{{ asset($linkvideo) }}">
                 </video> --}}
-              
+
             </div>
         </div>
         <div class="row mt-4">
@@ -57,13 +56,15 @@
                     <div class="tab-content" id="pills-tabContent">
                         <div class="container">
                             <div class="row ml-2">
-                                @foreach ($tema->recursos as $key => $recurso)
+                                @forelse ($tema->recursos as $key => $recurso)
                                     <div class="col-md-6 downloads"><a href="{{ asset($recurso->ruta) }}" download
                                             class="downloads__link">
                                             <i class="fas fa-download"></i>Material
                                             {{ $key + 1 }}<span>{{ $recurso->descripcion }}</span></a>
                                     </div>
-                                @endforeach
+                                @empty
+                                    <div><span>Aun no se registran materiales</span></div>
+                                @endforelse
                             </div>
                         </div>
                     </div>

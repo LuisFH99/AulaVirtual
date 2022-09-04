@@ -30,7 +30,7 @@
                                     <div class="mi_curso__">
                                         <div class="imagen">
                                             <a href="/">
-                                                <img src="{{ $matriculauser->publicacion->rutaimg }}" alt="">
+                                                <img src="{{  asset($matriculauser->publicacion->rutaimg) }}" alt="">
                                             </a>
                                         </div>
                                         <div class="contentido sombrita">
@@ -62,7 +62,7 @@
                                     <div class="mi_curso__">
                                         <div class="imagen">
                                             <a href="/">
-                                                <img src="{{ $matriculauser->publicacion->rutaimg }}" alt="">
+                                                <img src="{{  asset($matriculauser->publicacion->rutaimg) }}" alt="">
                                             </a>
                                         </div>
                                         <div class="contentido sombrita">

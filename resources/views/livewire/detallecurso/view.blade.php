@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-md-12 px-0">
         <div class="slider"
-            style="background-image: url('https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')">
+            style="background-image: url('{{asset($publicacion->rutaimg)}}')">
             <h1>{{ ucwords($publicacion->curso->nombre) }}</h1>
         </div>
     </div>
@@ -98,11 +98,11 @@
                                             @foreach ($modulo->temas as $tema)
                                                 <li>
                                                     <a
-                                                        href="{{ $tema->recursos->count() > 0 ? route('tema.index', $tema->id) : '#' }}">
+                                                        href="{{ ($tema->recursos->count() > 0 || $tema->videos->count() > 0) ? route('tema.index', $tema->id) : '#' }}">
                                                         <i class="fa fa-play-circle"
                                                             style="color: black; font-size: 21px"></i>
                                                         {{ $tema->descripcion }}
-                                                        @if ($tema->recursos->count() > 0)
+                                                        @if ($tema->recursos->count() > 0 || $tema->videos->count() > 0)
                                                             <button class="ver">Ver</button>
                                                         @endif
                                                     </a>
@@ -193,7 +193,7 @@
                         <h2 class="accordion-header" id="head_2">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#collapse_2" aria-expanded="true" aria-controls="collapse_2">
-                                ¿Cuál es la nota mínima para aprbar?
+                                ¿Cuál es la nota mínima para aprobar?
                             </button>
                         </h2>
                         <div id="collapse_2" class="accordion-collapse collapse" aria-labelledby="head_2">
@@ -213,7 +213,7 @@
                             <div class="accordion-body">
                                 <p>
                                     No, en caso obtenga una nota menor a {{$publicacion->nota_minima}} el sistema le permitirá rendir su
-                                    examen de nuevo, un máximo de 3 veces.
+                                    examen de nuevo, un máximo de 3 intentos.
                                 </p>
                             </div>
                         </div>

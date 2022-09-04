@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\Models\Docente;
 use App\Models\Estudiante;
 use App\Models\Matricula;
 use App\Models\Persona;
@@ -67,7 +68,7 @@ class MatriculaController extends Component
         $usuario->email = $this->dni;
         $usuario->password = bcrypt($this->dni);
         $usuario->personas_id = $persona->id;
-        $usuario->role = 'estudiante';
+        $usuario->role ="estudiante";
         $usuario->save();
         $usuario->assignRole('estudiante');
         $this->limpiarForm();
@@ -167,5 +168,32 @@ class MatriculaController extends Component
 
         // $persona->image=$this->profesion;        
 
+    }
+
+    public function savedocente(){
+        $persona = new Persona();
+        $persona->dni = $this->dni;
+        $persona->nombres = $this->nombes;
+        $persona->apellidos = $this->apellidos;
+        $persona->correo = $this->correo;
+        $persona->fechNac = $this->fecha_naciemiento;
+        $persona->celular = $this->celular;
+        $persona->save();
+
+        $estudiante = new Docente();
+        $estudiante->persona_id = $persona->id;
+        $estudiante->especialidad = $this->profesion;
+        $estudiante->save();
+        $estudiante->docentepublicacion()->attach($this->publicacion_id);
+
+        $usuario = new User();
+        $usuario->name = $persona->fullName();
+        $usuario->email = $this->dni;
+        $usuario->password = bcrypt($this->dni);
+        $usuario->personas_id = $persona->id;
+        $usuario->role ="docente"; //'estudiante';
+        $usuario->save();
+        $usuario->assignRole('docente');
+        $this->limpiarForm();
     }
 }
