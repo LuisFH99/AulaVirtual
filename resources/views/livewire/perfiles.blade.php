@@ -11,7 +11,7 @@
                 @endif
             </div>
 
-            <div class="redes sombrita">
+            {{-- <div class="redes sombrita">
                 <div class="tit">
                     <h3>Subir Foto:</h3>
                 </div>
@@ -24,19 +24,19 @@
                                         @error('image')<span class="text-danger er">{{$message}}</span>@enderror
                                         <button class="btn btn-primario btn-block" type="submit"><i class="fa-solid fa-upload"></i>&nbsp;Actualizar Foto</button>
                                       </div>
-                                    {{-- <div class="col-dm-10">
+                                    <div class="col-dm-10">
                                         <input type="file" wire:model.defer="image"  class="form-control @error('image') is-invalid @enderror" id="image">
                                         @error('image')<span class="text-danger er">{{$message}}</span>@enderror
                                     </div>
                                     <div class="col-md-2">
                                         <button class="btn btn-primary btn-block" type="submit"><i class="fa-solid fa-cloud-arrow-up"></i></button>
                                     </div>
-                                    <h6 class="text-center fw-bold text-primary" wire:loading  wire:target="image">Subiendo Foto...</h6> --}}
+                                    <h6 class="text-center fw-bold text-primary" wire:loading  wire:target="image">Subiendo Foto...</h6>
                                 </form>
                             </div>
                         </li>
                     </ul>
-            </div>
+            </div> --}}
         </div>
     </div>
     <div class="col-md-8 profile_right">
