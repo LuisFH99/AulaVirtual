@@ -16,6 +16,7 @@ class Cuestionario extends Component
     public function render()
     {
         $examen = Examen::findOrFail(session()->get('idexamen'));
+        // dd($examen->preguntas->shuffle());
         $this->publicacion_id = $examen->publicacion_id;
         return view('livewire.examen.view', compact('examen'));
     }

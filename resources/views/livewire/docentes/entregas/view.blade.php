@@ -8,7 +8,7 @@
             <div class="bd-callout bd-callout-info">
                 {{ ucfirst($tarea->descripcion) }}
                 @if (!is_null($tarea->ruta_archivo))
-                    <a href="{{ asset($entrega->ruta) }}" class="recurso my-3" download> <i class="fas fa-file-alt"
+                    <a href="{{ asset($tarea->ruta_archivo) }}" class="recurso my-3" download> <i class="fas fa-file-alt"
                             style="color: white; padding: 8px; background-color: blue; 
                     border-radius: 25%; font-size: 15px"></i></a>
                 @endif

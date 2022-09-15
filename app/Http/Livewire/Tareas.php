@@ -7,6 +7,7 @@ use App\Models\Estudiante;
 use App\Models\Matricula;
 use App\Models\Tarea;
 use Livewire\Component;
+use Illuminate\Support\Facades\Storage;
 
 class Tareas extends Component
 {
@@ -25,5 +26,13 @@ class Tareas extends Component
         $entregable=Entregable::where('tarea_id',$this->tarea_id)->where('matricula_id',$matricula->id)->first();
         // dd($entregable);
         return view('livewire.tareas.view', compact('tarea','entregable','matricula'));
+    }
+
+    public function EliminarEntrega($id)
+    {
+        $ruta=str_replace('storage','public',Entregable::where('id',$id)->value('ruta'));
+        //dd($ruta);
+        Storage::delete($ruta);
+        Entregable::destroy($id);
     }
 }

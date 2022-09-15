@@ -128,7 +128,7 @@ class PublicacionController extends Component
         $url = null;
         $directoryname = $this->nombre_curso . "_" . $this->publicacion_id;
         if ($this->doc_recurso) {
-            $filename = date("dmYhis") . "-" . $this->doc_recurso->getClientOriginalExtension();
+            $filename = date("dmYhis") . "-" . $this->doc_recurso->getClientOriginalName();
             $directory = $this->doc_recurso->storeAS('public/' . $directoryname . '/tareas', $filename);
             $url = Storage::url($directory);
         }
@@ -192,6 +192,8 @@ class PublicacionController extends Component
             ];
             $this->emit('alertaSistema', $datos);
         } else {
+            $ruta = str_replace('storage', 'public', Tarea::where('id', $id)->value('ruta_archivo'));
+            Storage::delete($ruta);
             Tarea::destroy($id);
             $datos = [
                 'modo' => 'success',

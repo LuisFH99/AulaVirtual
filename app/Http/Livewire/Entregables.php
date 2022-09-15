@@ -33,7 +33,7 @@ class Entregables extends Component
         $directoryname=$tarea->modulo->publicacion->curso->nombre."_".$tarea->modulo->publicacion->id;
         if ($this->doc_entrega) { 
             $filename=date("dmYhis")."-".$this->doc_entrega->getClientOriginalName();
-            $directory=$this->doc_entrega->storeAS('public/' . $directoryname . '/entregables/',$filename);
+            $directory=$this->doc_entrega->storeAS('public/' . $directoryname . '/entregables',$filename);
             $url = Storage::url($directory);
             $entegable=new Entregable();
             $entegable->ruta=$url;

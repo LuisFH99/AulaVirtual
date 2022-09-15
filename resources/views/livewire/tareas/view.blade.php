@@ -5,10 +5,10 @@
         </div>
         <div class="tit2">
             <p>{{ ucfirst($tarea->descripcion) }}</p>
-            @if (!is_null($tarea->ruta))
-                <a href="/" class="recurso" target="_blank"><img class="img-fluid"
+            @if (!is_null($tarea->ruta_archivo))
+                <a href="{{ asset($tarea->ruta_archivo) }}" download class="recurso" target="_blank"><img class="img-fluid"
                         src="{{ asset('img/img_tarea.svg') }}" width="20"
-                        alt="">&nbsp;Archivo_tarea_modulo_1.pdf</a>
+                        alt="">&nbsp;Archivo_Adjunto_Tarea</a>
             @endif
 
         </div>
@@ -24,7 +24,7 @@
                         <p>Estado de la entrega</p>
                     </th>
                     <th>
-                        <p>{{ is_null($entregable) ? 'Trabajo sin Entregar' : 'Trabajo Encargado' }}</p>
+                        <p>{{ is_null($entregable) ? 'Trabajo sin Entregar' : 'Trabajo Entregado' }}</p>
                         {{-- <p>Trabajo Entregado</p> --}}
                     </th>
                 </tr>
@@ -55,7 +55,12 @@
                     <th>
                         @if (!is_null($entregable))
                             <a href="{{ asset($entregable->ruta) }}" download class="downloads__link">
-                                <i class="fas fa-download"></i>Documento Enviado</span></a>
+                                <i class="fas fa-download"></i>Documento Enviado</span></a>&nbsp;&nbsp;
+                            @if ( $tarea->fecha_entrega >= date('Y-m-d'))
+                                <button class="btn btn-danger btn-sm " title="Eliminar Entrega"
+                                    wire:click="EliminarEntrega({{ $entregable->id }})"><i
+                                        class="fas fa-trash-alt"></i></button>
+                            @endif
                         @endif
                         <p>{{ is_null($entregable) ? 'Sin enviar' : '' }}</p>
                     </th>

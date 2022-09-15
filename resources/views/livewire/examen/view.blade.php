@@ -1,12 +1,12 @@
 <div class="container">
     <h3 style="font-size: 1.4rem">Examen Final de Curso : {{ $examen->publicacion->curso->nombre }}</h3>
     <form wire:submit.prevent="sendTest">
-        @foreach ($examen->preguntas as $pregunta)
+        @foreach ($examen->preguntas->shuffle() as $pregunta)
             <div class="card mb-3 ">
                 <div class="card-header">{{ $pregunta->pregunta }}</div>
 
                 <div class="card-body">
-                    @foreach ($pregunta->alternativas as $key => $alternativa)
+                    @foreach ($pregunta->alternativas->shuffle() as $key => $alternativa)
                         <div class="form-check">
                             <input class="form-check-input" type="radio"
                                 wire:model.defer="respuestas.alternativa{{ $pregunta->id }}" name="option{{ $pregunta->id }}"
