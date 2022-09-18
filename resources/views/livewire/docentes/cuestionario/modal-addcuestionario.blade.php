@@ -107,3 +107,12 @@
 @if ($vermodal)
     <div class="modal-backdrop fade show"></div>
 @endif
+<script>
+    function miNotificacion() {
+        Livewire.on('alertaSistema', function(datos) {
+            $(document).ready(() => {
+                toastr[datos.modo](datos.mensaje, "Mensaje del Sistema");
+            });
+        });
+    }
+</script>

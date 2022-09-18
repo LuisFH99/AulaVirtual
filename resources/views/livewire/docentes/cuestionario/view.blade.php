@@ -13,7 +13,7 @@
                         <h4><input class="form-check-input" type="checkbox"
                                 {{ $examen->is_visible == 1 ? 'checked' : '' }}
                                 wire:click="cambiarEstado({{ $examen->is_visible }})">
-                            <label class="form-check-label">Visible</label>
+                            <label class="form-check-label">{{ $examen->is_visible == 1 ? 'Visible' : 'No Visible' }}</label>
                         </h4>
                     </div>
                 </div>
@@ -89,3 +89,8 @@
     </div>
     @include('livewire.docentes.cuestionario.modal-addcuestionario')
 </div>
+<script>
+    window.onload = function() {
+        miNotificacion();
+    }
+</script>

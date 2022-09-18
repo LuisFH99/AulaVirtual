@@ -21,41 +21,43 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"
         integrity="sha512-lbwH47l/tPXJYG9AcFNoJaTMhGvYWhVM9YI43CT+uteTRRaiLCui8snIgyAN8XWgNjNhCqlAUdzZptso6OCoFQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script type="text/javascript">
-            $(document).ready(function() {
-                Livewire.on('confirmQuitarRecurso', recursoId=>{
-                    cuteAlert({
+    <script type="text/javascript">
+        $(document).ready(function() {
+            Livewire.on('confirmQuitarRecurso', recursoId => {
+                cuteAlert({
                     type: "question",
                     title: "Mensaje de Sistema",
                     img: "question.svg",
                     message: "¿Esta seguro de Quitar el Recurso?",
                     confirmText: "SI",
                     cancelText: "NO"
-                    }).then((e)=>{
-                        console.log(e)
-                    if ( e == ("confirm")){
-                        Livewire.emitTo('docentes.publicacion-controller','eliminarRecurso',recursoId)
+                }).then((e) => {
+                    console.log(e)
+                    if (e == ("confirm")) {
+                        Livewire.emitTo('docentes.publicacion-controller', 'eliminarRecurso',
+                            recursoId)
                     } else {
                         console.log('No confirmo');
                     }
-                    })
-                });
-                Livewire.on('confirmQuitarSoftware', requerimientoId=>{
-                    cuteAlert({
+                })
+            });
+            Livewire.on('confirmQuitarSoftware', requerimientoId => {
+                cuteAlert({
                     type: "question",
                     title: "Mensaje de Sistema",
                     img: "question.svg",
                     message: "¿Esta seguro de quitar el software del requerimiento?",
                     confirmText: "SI",
                     cancelText: "NO"
-                    }).then((e)=>{
-                        console.log(e)
-                    if ( e == ("confirm")){
-                        Livewire.emitTo('requerimiento','quitarsoftware',requerimientoId)
+                }).then((e) => {
+                    console.log(e)
+                    if (e == ("confirm")) {
+                        Livewire.emitTo('requerimiento', 'quitarsoftware', requerimientoId)
                     } else {
                         console.log('No confirmo');
                     }
-                    })
-                });
+                })
             });
+        });
+    </script>
 @endsection

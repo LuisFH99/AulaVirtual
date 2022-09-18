@@ -5,9 +5,9 @@ namespace App\Http\Livewire\Docentes;
 use App\Models\Alternativa;
 use App\Models\Examen;
 use App\Models\Preguntas;
-use Egulias\EmailValidator\Exception\AtextAfterCFWS;
+use App\Models\Resultados;
 use Livewire\Component;
-use Maatwebsite\Excel\Facades\Excel;
+
 
 class CuestionarioController extends Component
 {
@@ -18,12 +18,20 @@ class CuestionarioController extends Component
 
     public function render()
     {
-        $this->examenselect = Examen::findOrFail(session()->get('idexamen')) ;
+        $this->examenselect = Examen::findOrFail(session()->get('idexamen'));
         return view('livewire.docentes.cuestionario.view', ['examen' => $this->examenselect]);
     }
 
     public function viewModal()
     {
+        if (Resultados::where('examen_id', $this->examenselect->id)->exists()) {
+            $datos = [
+                'modo' => 'error',
+                'mensaje' => 'El Examen ya fue realizado, ¡No se puede Agregar Preguntas!'
+            ];
+            $this->emit('alertaSistema', $datos);
+            return 0;
+        }
         $this->vermodal = true;
     }
 
@@ -35,11 +43,19 @@ class CuestionarioController extends Component
     }
     public function limpiarForm()
     {
-        $this->reset(['enunciado', 'alternativa1', 'puntaje1', 'alternativa2', 'puntaje2', 'alternativa3', 'puntaje3', 'alternativa4', 'puntaje4']);
+        $this->reset(['enunciado', 'aternativas']);
     }
 
     public function addPregunta()
     {
+        if (Resultados::where('examen_id', $this->examenselect->id)->exists()) {
+            $datos = [
+                'modo' => 'error',
+                'mensaje' => 'El Examen ya fue realizado, ¡No se puede Agregar Preguntas!'
+            ];
+            $this->emit('alertaSistema', $datos);
+            return 0;
+        }
 
         $question = new Preguntas();
         $question->pregunta = $this->enunciado;
@@ -52,7 +68,11 @@ class CuestionarioController extends Component
             $alternative->pregunta_id = $question->id;
             $alternative->save();
         }
-
+        $datos = [
+            'modo' => 'success',
+            'mensaje' => 'Se Agrego una nueva pregunta al Examen'
+        ];
+        $this->emit('alertaSistema', $datos);
         $this->cancelar();
         $this->limpiarForm();
     }
@@ -61,9 +81,23 @@ class CuestionarioController extends Component
     {
         Examen::where('id', $this->examenselect->id)->update(['is_visible' => $status == 0 ? 1 : 0]);
     }
-    public function quitarPregunta($idpregunta){
-        
-        Alternativa::where('pregunta_id',$idpregunta)->delete();
-        Preguntas::destroy($idpregunta);
+    public function quitarPregunta($idpregunta)
+    {
+
+        if (Resultados::where('examen_id', $this->examenselect->id)->exists()) {
+            $datos = [
+                'modo' => 'error',
+                'mensaje' => 'El Examen ya fue realizado, ¡No se puede Eliminar Preguntas!'
+            ];
+            $this->emit('alertaSistema', $datos);
+        } else {
+            Alternativa::where('pregunta_id', $idpregunta)->delete();
+            Preguntas::destroy($idpregunta);
+            $datos = [
+                'modo' => 'success',
+                'mensaje' => 'La pregunta se Elimino de forma correcta'
+            ];
+            $this->emit('alertaSistema', $datos);
+        }
     }
 }
