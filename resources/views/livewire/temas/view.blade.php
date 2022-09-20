@@ -6,16 +6,6 @@
                     style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0"
                     allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
                 </iframe>
-                {{-- {!! $linkvideo !!} --}}
-                {{-- <iframe
-                    src="https://player.vimeo.com/video/734881392?h=e146cb96c3&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
-                    style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen; picture-in-picture"
-                    allowfullscreen title="video"></iframe> --}}
-                {{-- <iframe width="640" height="360" frameborder="0" src="https://mega.nz/embed/Td9EhSIa#gwVV0_ZvBGV4Nj-AcbMKQhLKYm2S__68QStUOJXZAzU" allowfullscreen ></iframe> --}}
-                {{-- <video style="position:absolute;top:0;left:0;width:100%;height:100%;" controls autoplay>
-                    <source src="{{ asset($linkvideo) }}">
-                </video> --}}
-
             </div>
         </div>
         <div class="row mt-4">
