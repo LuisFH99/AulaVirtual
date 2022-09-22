@@ -29,8 +29,7 @@
                         <label class="form-label mt-4">
                             <i class="fa-solid fa-folder" style="font-size: 20px"></i> Archivo del material
                         </label>
-                        <input type="file" class="form-control-file" wire:model="doc_recurso" id="uploadedfile"
-                            accept='.doc,.docx,.txt,.pdf,image/*'>
+                        <input type="file" class="form-control-file" wire:model="doc_recurso" id="uploadedfile">
                         @error('doc_recurso')
                             <br>
                             <small class="text-danger">{{ $message }}</small>
@@ -53,7 +52,8 @@
             @elseif ($formexamen)
                 <div class="modal-header">
                     <h5 class="font-weight-bold" id="exampleModalLabel">
-                        Generar Examen Final del curso: {{ $nombre_curso }}</h5>
+                        Generar Examen {{ isset($moduloselect) ? ' - ' . $moduloselect : 'Final' }} del curso:
+                        {{ $nombre_curso }}</h5>
                     <button type="button" wire:click="cancelar" class="btn-close" aria-label="Close">
                     </button>
                 </div>
@@ -139,8 +139,7 @@
                         <label class="form-label">
                             <i class="fa-solid fa-folder" style="font-size: 20px"></i> Añade un documento:
                         </label>
-                        <input type="file" class="form-control-file" wire:model="doc_recurso" id="uploadedfile"
-                            accept='.doc,.docx,.txt,.pdf,image/*'>
+                        <input type="file" class="form-control-file" wire:model="doc_recurso" id="uploadedfile">
                     </div>
                     {{-- <div class="drop-zone mt-2">
                         <i class="icon fa-solid fa-cloud-arrow-up"></i>
