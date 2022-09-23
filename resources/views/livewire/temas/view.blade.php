@@ -2,10 +2,15 @@
     <div class="col-md-10 sesion_left">
         <div class='embed-container'>
             <div style="align-content: center">
-                <iframe id="iframe_vimeo" src="{{ $linkvideo }}"
-                    style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0"
-                    allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
-                </iframe>
+                @if ($tema->videos->count() == 0)
+                    <img src="{{asset("img/not-video.jpg")}}" alt="" width="100%">
+                @else
+                    <iframe id="iframe_vimeo" src="{{ $tema->videos[0]->ruta }}"
+                        style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0"
+                        allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+                    </iframe>
+                @endif
+
             </div>
         </div>
         <div class="row mt-4">
@@ -24,7 +29,7 @@
                     </div>
                     <div class="detail">
                         <div class="docente">
-                            <img src="https://aula.enppeduca.com/images/profiles/1647913293.jpeg" alt="">
+                            <img src="{{ asset('img/tutor.png') }}" alt="">
                             @foreach ($tema->modulo->publicacion->publicaciondocente as $docente)
                                 <span>Docente: {{ $docente->datos->fullname() }}</span>
                             @endforeach

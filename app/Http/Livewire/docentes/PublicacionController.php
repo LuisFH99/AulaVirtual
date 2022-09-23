@@ -89,6 +89,20 @@ class PublicacionController extends Component
         }
     }
 
+    public function addExamenModulo($modulo, $id)
+    {
+        $examen = Examen::where('publicacion_id', $this->publicacion_id)->where('modulo_id', $id)->first();
+        if ($examen) {
+            session(['idexamen' => $examen->id]);
+            return redirect()->route('docentes.cuestionario.index');
+        } else {
+            $this->vermodal = true;
+            $this->moduloselect = $modulo;
+            $this->moduloid = $id;
+            $this->formexamen = true;
+        }
+    }
+
     public function cancelar()
     {
         $this->reset([
@@ -154,7 +168,8 @@ class PublicacionController extends Component
         $test->tiempo = $this->duracion;
         $test->peso = $this->peso;
         $test->publicacion_id = $this->publicacion_id;
-        $test->is_final = 1;
+        $test->is_final = (is_null($this->moduloid) ? 1 : null);
+        $test->modulo_id = (is_null($this->moduloid) ? null : $this->moduloid);
         $test->is_visible = 0;
         $test->save();
         $datos2 = [
@@ -180,7 +195,6 @@ class PublicacionController extends Component
             'mensaje' => 'Recurso Eliminado'
         ];
         $this->emit('alertaSistema', $datos);
-
     }
 
     public function eliminarTarea($id)
@@ -201,6 +215,5 @@ class PublicacionController extends Component
             ];
             $this->emit('alertaSistema', $datos);
         }
-
     }
 }

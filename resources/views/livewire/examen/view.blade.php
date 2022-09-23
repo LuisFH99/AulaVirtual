@@ -1,5 +1,5 @@
 <div class="container">
-    <h3 style="font-size: 1.4rem">Examen Final de Curso : {{ $examen->publicacion->curso->nombre }}</h3>
+    <h3 style="font-size: 1.4rem">Examen {{$examen->is_final==1?'Final':''}} del Curso : {{ $examen->publicacion->curso->nombre }}</h3>
     <form wire:submit.prevent="sendTest">
         @foreach ($examen->preguntas->shuffle() as $pregunta)
             <div class="card mb-3 ">

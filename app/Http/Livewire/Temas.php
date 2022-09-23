@@ -14,8 +14,9 @@ class Temas extends Component
     public function render()
     {
         $tema=Tema::where('id',$this->tema_id)->first();
-        $linkvideo=$tema->videos[0]->ruta;
+        // dd(($tema->videos->count()));
+        // $linkvideo=$tema->videos[0]->ruta;
         
-        return view('livewire.temas.view',compact('tema','linkvideo'));
+        return view('livewire.temas.view',compact('tema'));
     }
 }

@@ -28,5 +28,8 @@ class Modulo extends Model
     {
         return $this->hasMany(Tarea::class,'modulos_id','id');
     }
+    public function examenmodulo(){
+        return $this->hasOne(Examen::class,'modulo_id','id')->where('is_visible',1);
+    }
 
 }

@@ -3,7 +3,7 @@
         <div class="tit mb-2">
             <div class="row">
                 <div class="col-10">
-                    <h4 class="mb-3 px-2">AGREGAR PREGUNTA AL CUESTIONARIO FINAL <button class="btn btn-sm btn-circle"
+                    <h4 class="mb-3 px-2">AGREGAR PREGUNTA AL CUESTIONARIO {{($examen->is_final==1)?'FINAL':''}} <button class="btn btn-sm btn-circle"
                             title="Insertar Nueva Pregunta" wire:click="viewModal"><i class="fa-solid fa-plus"
                                 style="color: white"></i></button>
                     </h4>
@@ -19,7 +19,7 @@
                 </div>
             </div>
         </div>
-        <span class="badge bg-primary">Examen final del curso: {{ $examen->publicacion->curso->nombre }}</span>
+        <span class="badge bg-primary">Examen {{($examen->is_final==1)?'final':''}} del curso: {{ $examen->publicacion->curso->nombre }}</span>
         <span class="badge bg-success">Peso: {{ $examen->peso }}</span>
         <span class="badge bg-warning">Tiempo: {{ $examen->tiempo }} minutos</span>
 

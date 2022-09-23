@@ -1,7 +1,6 @@
 <div class="row justify-content-center">
     <div class="col-md-12 px-0">
-        <div class="slider"
-            style="background-image: url('https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')">
+        <div class="slider" style="background-image: url('{{ asset($publicacion->rutaimg) }}')">
             <h1>{{ $publicacion->curso->nombre }}</h1>
         </div>
     </div>
@@ -10,7 +9,6 @@
         <h1>{{ $publicacion->curso->nombre }}</h1>
         <h3>{{ $publicacion->tipopublicacion->tipo }}</h3>
         <div class="profesor">
-            {{-- <img src="https://aula.enppeduca.com/images/profiles/1647900951.jpeg" alt=""> --}}
             <img src="{{ asset('img/tutor.png') }}" alt="">
             <div class="description">
                 @if ($publicacion->publicaciondocente->count() > 0)
@@ -48,10 +46,6 @@
         </div>
         {{-- Acordion de los modulos --}}
         <div class="tab-content" id="pills-tabContent">
-            {{-- <div class="tab-pane fade " id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                <div class="lista_envivo">
-                </div>
-            </div> --}}
 
             <div class="tab-pane fade show active" id="pills-profile" role="tabpanel"
                 aria-labelledby="pills-profile-tab">
@@ -78,7 +72,8 @@
                                                             style="color: black; font-size: 25px"></i>&nbsp;Link
                                                         clases&nbsp;
                                                         <a href="{{ $modulo->link }}"
-                                                            class="btn btn-primary btn-sm text-white" target="_blank">Ingresar Link </a>
+                                                            class="btn btn-primary btn-sm text-white"
+                                                            target="_blank">Ingresar Link </a>
                                                     </span>
                                                 </div>
                                             </li>
@@ -93,9 +88,7 @@
                                                                 class="btn btn-success btn-sm text-white"
                                                                 wire:click.prevent="addRecurso('{{ $modulo->nombre }}','{{ $tema->descripcion }}',{{ $tema->id }})">Agregar
                                                                 Recursos</button>
-                                                            {{-- <a href="#"
-                                                                class="btn btn-success btn-sm text-white" wire:click.prevent="addRecurso()">Agregar
-                                                                Recursos</a> --}}
+
                                                         </span>
                                                         @foreach ($tema->recursos as $key => $recurso)
                                                             <span class="mt-2">
@@ -132,7 +125,7 @@
                                                     @foreach ($modulo->tareas as $key => $tarea)
                                                         @if ($modulo->id == $tarea->modulos_id)
                                                             <span>
-                                                                <a href="{{ route('docentes.entregas.index',$tarea->id) }}"
+                                                                <a href="{{ route('docentes.entregas.index', $tarea->id) }}"
                                                                     class="py-2 px-5">
                                                                     <img class="fluid-img"
                                                                         src="{{ asset('img/img_tarea.svg') }}"
@@ -142,10 +135,21 @@
                                                                 <i class="fas fa-minus-circle "
                                                                     style="color: red; font-size: 20px"
                                                                     wire:click.prevent="eliminarTarea({{ $tarea->id }})"></i>
-                                                                {{-- <i class="fa-solid fa-eye primary mr-4" style="font-size: 20px"></i> --}}
                                                             </span>
                                                         @endif
                                                     @endforeach
+                                                </div>
+
+                                            </li>
+                                            <li>
+                                                <div class="d-flex align-items-start flex-column bd-highlight mb-3">
+                                                    <span>
+                                                        <i class="fas fa-question-circle"
+                                                            style="color: black; font-size: 20px"></i>&nbsp;Evaluación&nbsp;
+                                                        <button type="button"
+                                                            class="btn btn-primary btn-sm text-white ml-5"
+                                                            wire:click.prevent="addExamenModulo('{{ $modulo->nombre }}','{{ $modulo->id }}')">Evaluación</button>
+                                                    </span>
                                                 </div>
 
                                             </li>
@@ -169,7 +173,6 @@
                 <br><br>
             </p>
             <button type="button" class="btn-card p-2" wire:click.prevent="addExamenFinal()">Generar Examen</button>
-            {{-- <a href="/Cuestionario" class="btn-card p-2" style="text-decoration: none">Generar Examen</a> --}}
         </div>
     </div>
     <div class="col-md-4 curso_right">

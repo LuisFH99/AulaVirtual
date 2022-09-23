@@ -1,7 +1,6 @@
 <div class="row justify-content-center">
     <div class="col-md-12 px-0">
-        <div class="slider"
-            style="background-image: url('{{asset($publicacion->rutaimg)}}')">
+        <div class="slider" style="background-image: url('{{ asset($publicacion->rutaimg) }}')">
             <h1>{{ ucwords($publicacion->curso->nombre) }}</h1>
         </div>
     </div>
@@ -10,8 +9,7 @@
         <h1>{{ $publicacion->curso->nombre }}</h1>
         <h3>{{ $publicacion->tipopublicacion->tipo }}</h3>
         <div class="profesor">
-            {{-- <img src="https://aula.enppeduca.com/images/profiles/1647900951.jpeg" alt=""> --}}
-            <img src="{{asset('img/tutor.png')}}" alt="">
+            <img src="{{ asset('img/tutor.png') }}" alt="">
             <div class="description">
                 @if ($publicacion->publicaciondocente->count() > 0)
                     @foreach ($publicacion->publicaciondocente as $docente)
@@ -55,10 +53,6 @@
 
         {{-- Acordion de los modulos --}}
         <div class="tab-content" id="pills-tabContent">
-            {{-- <div class="tab-pane fade " id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                <div class="lista_envivo">
-                </div>
-            </div> --}}
 
             <div class="tab-pane fade show active" id="pills-profile" role="tabpanel"
                 aria-labelledby="pills-profile-tab">
@@ -78,27 +72,20 @@
                                     <div class="accordion-body">
                                         <ul class="sesiones">
                                             <li>
-                                                <a href="{{ !is_null($modulo->link) ? $modulo->link : '#' }}" target="_blank">
+                                                <a href="{{ !is_null($modulo->link) ? $modulo->link : '#' }}"
+                                                    target="_blank">
                                                     <i class="fa-solid fa-paperclip"
                                                         style="color: black; font-size: 21px"></i>
                                                     Link de clase
                                                     <a href="{{ $modulo->link }}"
-                                                        class="btn btn-primary btn-sm text-white" target="_blank">Ingresar</a>
+                                                        class="btn btn-primary btn-sm text-white"
+                                                        target="_blank">Ingresar</a>
                                                 </a>
-                                                {{-- <div class="d-flex align-items-start flex-column bd-highlight mb-3"> --}}
-                                                {{-- <span>
-                                                    <i class="fa-solid fa-paperclip"
-                                                        style="color: black; font-size: 21px"></i>&nbsp;Link
-                                                    clases&nbsp;
-                                                    <a href="{{ $modulo->link }}"
-                                                        class="btn btn-primary btn-sm text-white">Ingresar</a>
-                                                </span> --}}
-                                                {{-- </div> --}}
                                             </li>
                                             @foreach ($modulo->temas as $tema)
                                                 <li>
                                                     <a
-                                                        href="{{ ($tema->recursos->count() > 0 || $tema->videos->count() > 0) ? route('tema.index', $tema->id) : '#' }}">
+                                                        href="{{ $tema->recursos->count() > 0 || $tema->videos->count() > 0 ? route('tema.index', $tema->id) : '#' }}">
                                                         <i class="fa fa-play-circle"
                                                             style="color: black; font-size: 21px"></i>
                                                         {{ $tema->descripcion }}
@@ -126,6 +113,18 @@
                                                 @endforeach
                                             @endif
 
+                                            @if (!is_null($modulo->examenmodulo))
+                                                <li>
+                                                    <a href="#"
+                                                        wire:click.prevent="darExamen({{ $modulo->examenmodulo->id }})"
+                                                        class="btn-card p-2" style="text-decoration: none">Examen de
+                                                        Modulo </a>
+                                                    <button class="btn btn-outline-info"
+                                                        wire:click.prevent="verResultados({{ $modulo->examenmodulo->id }})">
+                                                        Resultados</button>
+
+                                                </li>
+                                            @endif
                                         </ul>
                                     </div>
                                 </div>
@@ -149,6 +148,9 @@
                 </p>
                 <a href="#" wire:click.prevent="darExamen({{ $exmenfinal->id }})" class="btn-card p-2"
                     style="text-decoration: none">Ingresar al Examen </a>
+                <a href="#" wire:click.prevent="verResultados({{ $exmenfinal->id }})" class="btn-card p-2 mx-2"
+                    style="text-decoration: none">Resultados </a>
+                {{-- <button class="btn btn-primary btn-sm text-white mx-3"> <b>Resultados</b></button> --}}
             </div>
         @endif
 
@@ -198,7 +200,7 @@
                         </h2>
                         <div id="collapse_2" class="accordion-collapse collapse" aria-labelledby="head_2">
                             <div class="accordion-body">
-                                <p> Para aprobar debe obterner una nota mínima de {{$publicacion->nota_minima}}.</p>
+                                <p> Para aprobar debe obterner una nota mínima de {{ $publicacion->nota_minima }}.</p>
                             </div>
                         </div>
                     </div>
@@ -212,28 +214,14 @@
                         <div id="collapse_3" class="accordion-collapse collapse" aria-labelledby="head_3">
                             <div class="accordion-body">
                                 <p>
-                                    No, en caso obtenga una nota menor a {{$publicacion->nota_minima}} el sistema le permitirá rendir su
+                                    No, en caso obtenga una nota menor a {{ $publicacion->nota_minima }} el sistema le
+                                    permitirá rendir su
                                     examen de nuevo, un máximo de 3 intentos.
                                 </p>
                             </div>
                         </div>
                     </div>
-                    {{-- <div class="accordion-item">
-                        <h2 class="accordion-header" id="head_4">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapse_4" aria-expanded="true" aria-controls="collapse_4">
-                                ¿Hasta cuándo tengo habilitado mi aula virtual?
-                            </button>
-                        </h2>
-                        <div id="collapse_4" class="accordion-collapse collapse" aria-labelledby="head_4">
-                            <div class="accordion-body">
-                                <p>
-                                    Su aula virtual estará disponible durante un año desde la fecha en que
-                                    recibe su acceso.
-                                </p>
-                            </div>
-                        </div>
-                    </div> --}}
+
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="head_5">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -255,4 +243,14 @@
             </div>
         </div>
     </div>
+    @include('livewire.detallecurso.results')
 </div>
+<script>
+    window.onload = function() {
+        Livewire.on('alertaSistema', function(datos) {
+            $(document).ready(() => {
+                toastr[datos.modo](datos.mensaje, "Mensaje del Sistema");
+            });
+        });
+    }
+</script>
