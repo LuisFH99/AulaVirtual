@@ -44,8 +44,16 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primario" wire:click="guardarRecurso"><i
-                            class="fa-solid fa-paper-plane" style="font-size: 20px"></i>&nbsp;Guardar Recurso</button>
+                    
+                    <button wire:loading wire:target="doc_recurso" class="btn btn-primario text-primary" type="button" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Cargando Archivo...
+                    </button>
+
+                    <div wire:loading.remove wire:target="doc_recurso">
+                        <button type="button" class="btn btn-primario" wire:click="guardarRecurso"><i class="fa-solid fa-paper-plane" style="font-size: 20px"></i>&nbsp;Guardar Recurso</button>
+                    </div>
+
                     <button type="button" class="btn btn-cancel" wire:click="cancelar"><i class="fa-solid fa-ban"
                             style="font-size: 20px"></i>&nbsp;Cancelar</button>
                 </div>
@@ -124,7 +132,7 @@
                         {{-- <input type="text" class="form-input" name="nombre" id="nombre" wire:model="nombre"> --}}
                     </div>
 
-                    <div class="mt-2">
+                    <div class="mt-4">
                         <label class="form-label">
                             Designa ultima fecha de entrega:
                         </label>
@@ -135,7 +143,7 @@
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
-                    <div class="mt-2">
+                    <div class="mt-4">
                         <label class="form-label">
                             <i class="fa-solid fa-folder" style="font-size: 20px"></i> Añade un documento:
                         </label>
@@ -150,10 +158,16 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primario" wire:click="guardarTarea"><i
-                            class="fa-solid fa-paper-plane" style="font-size: 20px"></i>&nbsp;Generar Tarea</button>
-                    <button type="button" class="btn btn-cancel" wire:click="cancelar"><i class="fa-solid fa-ban"
-                            style="font-size: 20px"></i>&nbsp;Cancelar</button>
+
+                    <button wire:loading wire:target="doc_recurso" class="btn btn-primario text-primary" type="button" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Cargando Archivo...
+                    </button>
+
+                    <div wire:loading.remove wire:target="doc_recurso">
+                        <button type="button" class="btn btn-primario" wire:click="guardarTarea"><i class="fa-solid fa-paper-plane" style="font-size: 20px"></i>&nbsp;Generar Tarea</button>
+                    </div>
+                    <button type="button" class="btn btn-cancel" wire:click="cancelar"><i class="fa-solid fa-ban" style="font-size: 20px"></i>&nbsp;Cancelar</button>
                 </div>
             @endif
         </div>
