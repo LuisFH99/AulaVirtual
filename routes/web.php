@@ -73,3 +73,4 @@ Route::view("/Cuestionario",'web.Cuestionario');
 Route::view("/revisionTareas",'web.revisionTareas');
 Route::view("/listaRevision",'web.listaRevision');
 
+Route::view("/foros",'web.foro');

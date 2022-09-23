@@ -32,9 +32,19 @@
                 <input type="file" class="form-control-file" wire:model="doc_entrega" >  
                 </div><br>
                 <div class="text-start">
-                    <button type="button" wire:click="guardarEntregable" class="btn btn-primario">
-                        <i class="fa-solid fa-paper-plane fa-1x" style="color: white"></i>&nbsp;Guardar Cambios
+
+                    <button wire:loading wire:target="doc_entrega" class="btn btn-primario text-primary" type="button" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Cargando Archivo...
                     </button>
+
+                    <div wire:loading.remove wire:target="doc_entrega">
+                        <button type="button" wire:click="guardarEntregable" class="btn btn-primario">
+                            <i class="fa-solid fa-paper-plane fa-1x"></i>&nbsp;Guardar Cambios
+                        </button>                    
+                    </div>
+
+
                     {{-- <button type="submit" class="btn btn-cancel"><i class="fa-solid fa-ban fa-1x"
                             style="color: white"></i>&nbsp;Cancelar</button> --}}
                 </div>
