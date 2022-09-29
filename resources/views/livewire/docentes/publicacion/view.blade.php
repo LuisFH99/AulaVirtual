@@ -154,6 +154,40 @@
 
                                             </li>
 
+                                            <!-- Seccion de Foros-->
+                                            <li>
+                                                <div class="d-flex align-items-start flex-column bd-highlight mb-3">
+                                                    <span>
+                                                        <i class="fas fa-comment-alt"
+                                                            style="color: black; font-size: 20px"></i>&nbsp;Foro&nbsp;
+                                                        <button type="button"
+                                                            class="btn btn-primary btn-sm text-white ml-5"
+                                                            wire:click.prevent="addForo('{{$modulo->nombre}}','{{ $modulo->id }}')">Crear Foro</button>
+                                                    </span>
+                                                <!-- item de las foros creadas -->
+                                                    @foreach ($modulo->foros as $key => $foro)
+                                                        @if ($modulo->id == $foro->modulo_id)
+                                                            @if ($foro->foro_id > 0)
+                                                            @continue;
+                                                            @else
+                                                            <span> 
+                                                                <a href="{{ route('foro.index', $foro->id) }}"
+                                                                    class="py-2 px-5">
+                                                                    <img class="fluid-img"
+                                                                        src="{{ asset('img/img_tarea.svg') }}"
+                                                                        width="25"
+                                                                        alt="">&nbsp;Foro_{{ $key + 1 }}
+                                                                </a>
+                                                                <i class="fas fa-minus-circle "
+                                                                    style="color: red; font-size: 20px;cursor: pointer"
+                                                                    wire:click.prevent="eliminarForo({{ $foro->id }})"></i>
+                                                            </span>
+                                                            @endif
+                                                        @endif
+                                                    @endforeach
+                                                </div>
+                                            </li>
+
                                         </ul>
                                     </div>
                                 </div>

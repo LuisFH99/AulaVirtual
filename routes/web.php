@@ -35,6 +35,7 @@ Route::middleware(['auth'])->group(function () {
     Route::view('/curso/tarea/{idtarea}/entrega/{idmatricula}', 'livewire.entregables.index')->name('entregable.index');
     Route::view('/curso/examen/cuestionario', 'livewire.examen.index')->name('examen.index');
     //Route::get('/cursos',  function () {return view('web.cursos');});
+    Route::view('/curso/foro/{idforo}', 'livewire.foros.index')->name('foro.index');
 
     Route::view('/docente/cursos', 'livewire.docentes.cursos.index')->name('docentes.curso.index');
     Route::view('/docente/curso/{idpublicacion}', 'livewire.docentes.publicacion.index')->name('docentes.publicacion.index');
@@ -73,4 +74,4 @@ Route::view("/Cuestionario",'web.Cuestionario');
 Route::view("/revisionTareas",'web.revisionTareas');
 Route::view("/listaRevision",'web.listaRevision');
 
-Route::view("/foros",'web.foro');
+Route::view("/foros/{id}",'web.foro')->name('foro');

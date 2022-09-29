@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Estudiante;
+use App\Models\Foro;
 use App\Models\Publicacion;
 use App\Models\Matricula;
 use Livewire\Component;
@@ -19,11 +20,11 @@ class DetalleCurso extends Component
         $this->publicacion_id = request('idpublicacion');
     }
 
-    public function render()
-    {
+    public function render(){
+        $foros = Foro::general()->get(); 
         $publicacion = Publicacion::where('id', $this->publicacion_id)->first();
         $exmenfinal = $publicacion->examen->where('is_final', 1)->first();
-        return view('livewire.detallecurso.view', compact('publicacion', 'exmenfinal'));
+        return view('livewire.detallecurso.view', compact('publicacion', 'exmenfinal','foros'));
     }
 
     public function verResultados($idExamen)
