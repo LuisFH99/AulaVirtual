@@ -149,6 +149,9 @@
                                                         <button type="button"
                                                             class="btn btn-primary btn-sm text-white ml-5"
                                                             wire:click.prevent="addExamenModulo('{{ $modulo->nombre }}','{{ $modulo->id }}')">Evaluación</button>
+                                                        <button type="button"
+                                                            class="btn btn-success btn-sm text-white ml-5"
+                                                            wire:click.prevent="resultadoExamen({{ $modulo->id }})">Resultados</button>
                                                     </span>
                                                 </div>
 
@@ -173,6 +176,7 @@
                 <br><br>
             </p>
             <button type="button" class="btn-card p-2" wire:click.prevent="addExamenFinal()">Generar Examen</button>
+            <button type="button" class="btn-card p-2" wire:click.prevent="resultadoExamen(0)">Resultados</button>
         </div>
     </div>
     <div class="col-md-4 curso_right">
@@ -191,6 +195,7 @@
                             módulos</span></li>
                 </ul>
             </div>
+            <button type="button" class="btn-card p-2" wire:click.prevent="calificaciones()">Calificacion Final</button>
         </div>
     </div>
     @include('livewire.docentes.publicacion.modal-create')

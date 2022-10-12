@@ -7,10 +7,11 @@
             </div>
             <div class="modal-body">
                 <table
-                    class="table table-sm table-borderless caption-top table-bordered border-2 border-primary text-center">
+                    class="table table-sm table-borderless caption-top table-bordered border-2 border-primary text-center ">
                     <thead>
                         <tr>
                             <th colspan="3"><strong>Resultados Optenidos en el Examen</strong> </th>
+                            <th rowspan="2" style="vertical-align: middle">Calificación</th>
                         </tr>
                         <tr>
                             <th scope="col">Primer Intento</th>
@@ -21,7 +22,7 @@
                     <tbody>
                         <tr>
                             @foreach ($notas as $nota)
-                                <td>{{ is_null($nota) ? '-' : $nota }}</td>
+                                <td>{{ is_null($nota) ? '-' : substr('0' . $nota, -2) }}</td>
                             @endforeach
 
                         </tr>

@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Docentes;
 
 use App\Models\Entregable;
 use App\Models\Examen;
+use App\Models\Modulo;
 use Livewire\Component;
 use App\Models\Publicacion;
 use App\Models\RecursosModulo;
@@ -100,6 +101,46 @@ class PublicacionController extends Component
             $this->moduloselect = $modulo;
             $this->moduloid = $id;
             $this->formexamen = true;
+        }
+    }
+
+    public function resultadoExamen($idmodulo)
+    {
+        if ($idmodulo == 0) {
+            $examen = Examen::where('publicacion_id', $this->publicacion_id)->where('is_final', 1)->first();
+            $tipo = "Final";
+        } else {
+            $examen = Examen::where('publicacion_id', $this->publicacion_id)->where('modulo_id', $idmodulo)->first();
+            $tipo = Modulo::where("id", $idmodulo)->value('nombre');
+        }
+
+        if ($examen) {
+            session(['idexamen' => $examen->id, 'idpublicacion' => $this->publicacion_id, 'tipo' => $tipo]);
+            return redirect()->route('docentes.resultado.index');
+        } else {
+            $datos2 = [
+                'modo' => 'warning',
+                'mensaje' => 'Genere un Examen para ver los Resultados'
+            ];
+            $this->emit('alertaSistema', $datos2);
+        }
+    }
+
+    public function calificaciones()
+    {
+
+        $examen = Examen::where('publicacion_id', $this->publicacion_id)->get();
+
+        if ($examen) {
+            session(['idpublicacion' => $this->publicacion_id, 'curso' => $this->nombre_curso]);
+            return redirect()->route('docentes.calificacion.index');
+        } else {
+            $datos = [
+                'modo' => 'warning',
+                'mensaje' => 'Debe Generar Examenes para ver las Calificaciones'
+            ];
+            
+            $this->emit('alertaSistema', $datos);
         }
     }
 

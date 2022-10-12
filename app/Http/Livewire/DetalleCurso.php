@@ -13,7 +13,7 @@ class DetalleCurso extends Component
 {
     public $publicacion_id;
     public $resultados;
-    public $notas = ["intento1" => null, "intento2" => null, "intento3" => null];
+    public $notas = ["intento1" => null, "intento2" => null, "intento3" => null,"calificacion" => 0];
     public function mount()
     {
         $this->publicacion_id = request('idpublicacion');
@@ -36,6 +36,9 @@ class DetalleCurso extends Component
             $nota = 0;
             foreach ($result->respuestas as $respuesta) {
                 $nota += $respuesta->puntaje;
+                if ($nota > $this->notas["calificacion"]) {
+                    $this->notas = array_replace($this->notas, ["intento" . ($key + 1) => $nota, "calificacion" => $nota]);
+                }
                 $this->notas = array_replace($this->notas, ["intento" . ($key + 1) => $nota]);
             }
         }
