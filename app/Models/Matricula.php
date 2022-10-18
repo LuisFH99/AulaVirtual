@@ -23,4 +23,8 @@ class Matricula extends Model
     {
         return $this->belongsTo(Publicacion::class, 'publicacion_id', 'id');
     }
+    public function certificados()
+    {
+        return $this->hasMany(Certificado::class);
+    }
 }

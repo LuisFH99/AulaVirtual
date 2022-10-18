@@ -5,10 +5,12 @@ namespace App\Http\Livewire\Docentes;
 use App\Models\Entregable;
 use App\Models\Examen;
 use App\Models\Modulo;
+use App\Models\Foro;
 use Livewire\Component;
 use App\Models\Publicacion;
 use App\Models\RecursosModulo;
 use App\Models\Tarea;
+use GuzzleHttp\Promise\Create;
 use Illuminate\Support\Facades\Storage;
 use Livewire\WithFileUploads;
 
@@ -19,8 +21,9 @@ class PublicacionController extends Component
     public $vermodal = false;
     public $fromrecurso = false;
     public $formexamen = false;
+    public $formforo = false;
     public $nombre_curso;
-    public $moduloselect, $temaselect, $temaid, $moduloid;
+    public $moduloselect, $temaselect, $temaid, $moduloid, $descripcion, $adjunto;
     public $nombre, $fecha, $doc_recurso;
     public $duracion, $peso;
     protected $listeners = ['eliminarRecurso', 'eliminarTarea'];
@@ -46,8 +49,16 @@ class PublicacionController extends Component
         'doc_recurso.max' => 'El tamaño maximo del archivo es 5MB',
         'fecha.required' => 'Indicar fecha maxima de entrega',
         'duracion.required' => 'Indicar la duracion del examen',
-        'peso.required' => 'Indicar el peso del examen'
+        'peso.required' => 'Indicar el peso del examen',
+        'descripcion.required' => 'Este campo es requerido',
+        'adjunto.max' => 'El tamaño maximo del archivo es 5MB',
     ];
+
+    protected $rulesForo = [
+        'descripcion' => 'required',
+        'adjunto'     => 'max:5120',
+    ];
+
 
     public function mount()
     {
@@ -75,6 +86,8 @@ class PublicacionController extends Component
         $this->vermodal = true;
         $this->moduloselect = $modulo;
         $this->moduloid = $id;
+        $this->formforo = false;
+
     }
 
     public function addExamenFinal()
@@ -143,13 +156,19 @@ class PublicacionController extends Component
             $this->emit('alertaSistema', $datos);
         }
     }
+    public function addForo($modulo,$id){
+        $this->vermodal     = true;
+        $this->formforo     = true;
+        $this->moduloselect = $modulo;
+        $this->moduloid     = $id;
+    }
 
     public function cancelar()
     {
         $this->reset([
             'vermodal', 'fromrecurso', 'moduloselect',
             'temaselect', 'temaid', 'nombre', 'fecha',
-            'moduloid', 'doc_recurso', 'formexamen'
+            'moduloid', 'doc_recurso', 'formexamen','formforo'
         ]);
     }
 
@@ -226,6 +245,38 @@ class PublicacionController extends Component
         $this->cancelar();
     }
 
+    public function guardarForo(){
+
+        $this->validate($this->rulesForo, $this->msjError);
+        $url = null;
+        
+        $directoryname = $this->nombre_curso . "_" . $this->publicacion_id;
+        if ($this->adjunto) {
+            $filename = date("dmYhis") . "-" . $this->adjunto->getClientOriginalName();
+            $directory = $this->adjunto->storeAS('public/' . $directoryname . '/foros', $filename);
+            $url = Storage::url($directory);
+        }
+
+        $id_user=auth()->user()->id;
+    
+        $foro = new Foro();
+        $foro->publicacion_id = $this->publicacion_id;
+        $foro->modulo_id = $this->moduloid;
+        $foro->users_id = $id_user;
+        $foro->descripcion = $this->descripcion;
+        $foro->adjunto = $url;
+        $foro->save();
+         
+
+
+        $datos = [
+            'modo' => 'success',
+            'mensaje' => 'Se creo el Foro'
+        ];
+        $this->emit('alertaSistema', $datos);
+        $this->cancelar();
+    }
+
     public function eliminarRecurso($id)
     {
         $ruta = str_replace('storage', 'public', RecursosModulo::where('id', $id)->value('ruta'));
@@ -253,6 +304,26 @@ class PublicacionController extends Component
             $datos = [
                 'modo' => 'success',
                 'mensaje' => 'Tarea Eliminada'
+            ];
+            $this->emit('alertaSistema', $datos);
+        }
+    }
+
+    public function eliminarForo($id)
+    {
+        if (Foro::where('foro_id', $id)->exists()) {
+            $datos = [
+                'modo' => 'error',
+                'mensaje' => 'Existen Respuestas, ¡No se puede Eliminar!'
+            ];
+            $this->emit('alertaSistema', $datos);
+        } else {
+            $ruta = str_replace('storage', 'public', Foro::where('id', $id)->value('adjunto'));
+            Storage::delete($ruta);
+            Foro::destroy($id);
+            $datos = [
+                'modo' => 'success',
+                'mensaje' => 'Foro Eliminado'
             ];
             $this->emit('alertaSistema', $datos);
         }

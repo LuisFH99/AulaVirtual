@@ -29,14 +29,16 @@
                         role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="{{ asset('img/user.svg') }}" alt="" width="45" height="45"
                             class="d-inline-block">
+                        @auth
                         {{ Auth::user()->name }}
+                        @endauth
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="width: 100%">
                         <li><a class="dropdown-item" href="{{ url('/perfil') }}">Mi perfil</a></li>
                         {{-- <li><a class="dropdown-item" href="#">Another action</a></li> --}}
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
+                        {{-- <li><hr class="dropdown-divider"></li> --}}
+                        <li><a class="dropdown-item" href="{{ url('/Miscertificados') }}">Mis certificados</a></li>
+                        <li><hr class="dropdown-divider"></li>
                         <li>
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();document.getElementById('logout-form').submit();">

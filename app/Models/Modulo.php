@@ -32,4 +32,7 @@ class Modulo extends Model
         return $this->hasOne(Examen::class,'modulo_id','id')->where('is_visible',1);
     }
 
+    public function foros(){
+        return $this->hasMany(Foro::class,'modulo_id','id');
+    }
 }

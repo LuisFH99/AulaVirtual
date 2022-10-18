@@ -107,6 +107,46 @@
                     <button type="button" class="btn btn-cancel" wire:click="cancelar"><i class="fa-solid fa-ban"
                             style="font-size: 20px"></i>&nbsp;Cancelar</button>
                 </div>
+            @elseif ($formforo)
+                <div class="modal-header">
+                    <h5 class="font-weight-bold" id="exampleModalLabel">Creacion de Foro&nbsp;{{ $moduloselect }}</h5>
+                    <button type="button" wire:click="cancelar" class="btn-close" aria-label="Close">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p style="font-family: font-semibold" style="text-align: justify"><i class="fa-solid fa-angle-right"
+                            style="font-size: 20px"></i>&nbsp;Estimado docente, en este apartado
+                        podra crear un foro dirigido a los estudiantes.
+                    </p>
+                    <div>
+                        <label class="form-label mb-2">
+                            Añade una descripcion:
+                        </label>
+                        <textarea class="form-control" wire:model="descripcion" cols="50" placeholder="Descripcion de Foro..."
+                            id="floatingTextarea" style="height: 10vh" required></textarea>
+                        @error('descripcion')<small class="text-danger">{{ $message }}</small>@enderror
+                        {{-- <input type="text" class="form-input" name="nombre" id="nombre" wire:model="nombre"> --}}
+                    </div>
+                    <div class="mt-4">
+                        <label class="form-label mb-2">
+                            <i class="fa-solid fa-folder" style="font-size: 20px"></i> Añade un documento:
+                        </label>&nbsp;
+                        <input type="file" class="form-control-file" wire:model="adjunto" id="uploadedfile">
+                        @error('adjunto')<small class="text-danger">{{ $message }}</small>@enderror
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    
+                    <button wire:loading wire:target="adjunto" class="btn btn-primario text-primary" type="button" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Cargando Archivo...
+                    </button>
+                    
+                    <div wire:loading.remove wire:target="adjunto">
+                    <button type="button" class="btn btn-primario" wire:click="guardarForo"><i class="fa-solid fa-paper-plane" style="font-size: 20px"></i>&nbsp;Generar Foro</button>
+                    </div> 
+                    <button type="button" class="btn btn-cancel" wire:click="cancelar"><i class="fa-solid fa-ban" style="font-size: 20px"></i>&nbsp;Cancelar</button>
+                </div>
             @else
                 <div class="modal-header">
                     <h5 class="font-weight-bold" id="exampleModalLabel">

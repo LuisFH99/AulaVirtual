@@ -35,6 +35,7 @@ Route::middleware(['auth'])->group(function () {
     Route::view('/curso/tarea/{idtarea}/entrega/{idmatricula}', 'livewire.entregables.index')->name('entregable.index');
     Route::view('/curso/examen/cuestionario', 'livewire.examen.index')->name('examen.index');
     //Route::get('/cursos',  function () {return view('web.cursos');});
+    Route::view('/curso/foro/{idforo}', 'livewire.foros.index')->name('foro.index');
 
     Route::view('/docente/cursos', 'livewire.docentes.cursos.index')->name('docentes.curso.index');
     Route::view('/docente/curso/{idpublicacion}', 'livewire.docentes.publicacion.index')->name('docentes.publicacion.index');
@@ -53,6 +54,8 @@ Route::middleware(['auth'])->group(function () {
     Route::view('/gestion/matriculados', 'livewire.admin.matricula.index')->name('admin.matricula.index');
     Route::view('/gestion/modulos', 'livewire.admin.modulos.index')->name('admin.modulos.index');
     Route::view('/gestion/temas', 'livewire.admin.temas.index')->name('admin.temas.index');
+    Route::view("/Miscertificados",'web.certificados')->name('Miscertificados');
+
 });
 
 
@@ -75,4 +78,15 @@ Route::view("/Cuestionario",'web.Cuestionario');
 Route::view("/revisionTareas",'web.revisionTareas');
 Route::view("/listaRevision",'web.listaRevision');
 
-Route::view("/foros",'web.foro');
+Route::view("/foros/{id}",'web.foro')->name('foro');
+
+/* prueba QR */
+Route::get('/qr_qenerate', [App\Http\Controllers\qrController::class, 'qr_qenerate'])->name('qr_qenerate');
+
+/*Certificado en pdf */
+Route::get('/certificado/{id}', [App\Http\Controllers\ExportController::class, 'reportCertificado'])->name('reportCertificado');
+Route::get('/download/{id}', [App\Http\Controllers\ExportController::class, 'downloadCertificado'])->name('downloadCertificado');
+
+/*Vista cuando se pase el QR */
+Route::view("/certificado/detalle/{idcertificado}",'vercertificado')->name('vercertificado');
+

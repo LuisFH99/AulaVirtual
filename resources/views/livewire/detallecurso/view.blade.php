@@ -102,7 +102,8 @@
                                                 @foreach ($modulo->tareas as $key => $tarea)
                                                     <li>
                                                         <a href="{{ route('tarea.index', $tarea->id) }}">
-                                                            <i class="fa-solid fa-file-circle-exclamation"></i>
+
+                                                            <i class="fas fa-file-signature" style=" font-size: 21px"></i>
                                                             Tarea N° {{ $key + 1 }}
 
                                                             <button class="ver">Ingresar</button>
@@ -110,6 +111,22 @@
                                                         </a>
 
                                                     </li>
+                                                @endforeach
+                                            @endif
+
+                                            @if ($modulo->foros->count() > 0)
+                                                @foreach ($modulo->foros as $key => $foro)
+                                                    @if ($foro->foro_id > 0)
+                                                        @continue;
+                                                    @else
+                                                        <li>
+                                                            <a href="{{ route('foro.index', $foro->id) }}">
+                                                                <i class="fas fa-exclamation-circle" style=" font-size: 21px"></i>
+                                                                Foro N° {{ $key + 1 }}
+                                                                <button class="btn btn-danger btn-sm text-white">Responder</button>
+                                                            </a>
+                                                        </li>
+                                                    @endif
                                                 @endforeach
                                             @endif
 

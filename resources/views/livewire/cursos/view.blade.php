@@ -13,7 +13,6 @@
                                             wire:click.prevent="SeleccionarCategoria('{{ $categoria->nombre }}')">{{ $categoria->nombre }}</a>
                                     </li>
                                 @endforeach
-
                             </ul>
                         </div>
                     </div>
