@@ -33,9 +33,27 @@
 .card-studen .seccion-name {
     border-bottom: 1px solid #ced4da;
 }
-.card-studen .seccion-name i {
-    color: green;;
+.card-studen .seccion-name .fa-check-circle {
+    color: green;
 }
+
 .card-studen p{
     font-size: 13px;
+}
+
+.list-certificates{
+    border-top: 1px solid #7a7d80;
+}
+
+.list-certificates .item{
+    vertical-align: center ;
+    border-radius: 10px;
+    border:1px solid#ced4da;
+    margin-top: 5px;
+    
+}
+
+.list-certificates .fa-medal{
+    font-size: 2em;
+    color: rgb(29, 14, 248);
 }

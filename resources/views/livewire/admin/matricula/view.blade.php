@@ -32,14 +32,20 @@
         </div>
         <table>
             <tbody>
-                @if (!is_null($matriculados))
+                @if ($matriculados->count() > 0)
                     @foreach ($matriculados as $matriculado)
                         <tr>
                             <div class="card-studen mb-1">
-                                <div class="seccion-name">
-                                    <h5><i
-                                            class="fas fa-check-circle mr-2"></i>{{ $matriculado->estudiante->datos->fullname() }}
-                                    </h5>
+                                <div class="seccion-name row pb-1">
+                                    <div class="col-9">
+                                        <h5><i
+                                                class="fas fa-check-circle mr-2"></i>{{ $matriculado->estudiante->datos->fullname() }}
+                                        </h5>
+                                    </div>
+                                    <div class="col-3 d-flex justify-content-end">
+                                        <button class="btn btn-secondary btn-sm" wire:click="modalcertificado({{$matriculado->id}})"><i class="fas fa-certificate"></i>
+                                            Certificado</button>
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <p class="col-4">Correo: {{ $matriculado->estudiante->datos->correo }}</p>
@@ -52,9 +58,7 @@
                 @else
                     <tr>
                         <div class="card-studen">
-                            <div class="seccion-name">
-                                <h5>No hay Estudiantes Matriculados</h5>
-                            </div>
+                            <h5>No hay Estudiantes Matriculados</h5>
                         </div>
                     </tr>
                 @endif
@@ -62,4 +66,22 @@
         </table>
     </div>
     @include('livewire.admin.matricula.matricular')
+    @include('livewire.admin.matricula.certificado')
 </div>
+<script>
+    function Notificacion() {
+        Livewire.on('notify', function(datos) {
+            $(document).Toasts('create', {
+                class: datos.modo,
+                title: 'Mensaje de Sistema',
+                body: datos.mensaje,
+                autohide: true,
+                delay: 2000
+            })
+        });
+
+    }
+    window.onload = function() {
+        Notificacion();
+    }
+</script>

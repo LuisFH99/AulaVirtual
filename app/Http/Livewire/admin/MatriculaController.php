@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\Models\Certificado;
 use App\Models\Docente;
 use App\Models\Estudiante;
 use App\Models\Matricula;
@@ -9,12 +10,18 @@ use App\Models\Persona;
 use App\Models\Publicacion;
 use App\Models\User;
 use Livewire\Component;
+use Illuminate\Support\Facades\Storage;
+use Livewire\WithFileUploads;
 
 class MatriculaController extends Component
 {
+    use WithFileUploads;
     public $publicacion_id, $lista;
-    public $vermodal = false;
+    public $vermodal = false, $modalcertificado = false;
     public $apellidos, $nombes, $dni, $correo, $celular, $fecha_naciemiento, $profesion;
+    public $certificados = [], $matriculadoid, $nombre;
+    public $listcertificados = [];
+
 
     public function mount()
     {
@@ -31,14 +38,25 @@ class MatriculaController extends Component
     {
         $this->vermodal = true;
     }
+
+    public function modalcertificado($id)
+    {
+
+        $this->listcertificados = Certificado::where("matricula_id", $id)->get();
+        $this->nombre=Matricula::findOrFail($id)->estudiante->datos->fullname();
+        $this->matriculadoid = $id;
+        $this->modalcertificado = true;
+    }
+
     public function cancelar()
     {
         $this->vermodal = false;
+        $this->modalcertificado = false;
     }
 
     public function limpiarForm()
     {
-        $this->reset(['apellidos', 'nombes', 'dni', 'correo', 'celular', 'fecha_naciemiento', 'profesion']);
+        $this->reset(['apellidos', 'nombes', 'dni', 'correo', 'celular', 'fecha_naciemiento', 'profesion','certificados']);
     }
 
     public function registrar()
@@ -68,7 +86,7 @@ class MatriculaController extends Component
         $usuario->email = $this->dni;
         $usuario->password = bcrypt($this->dni);
         $usuario->personas_id = $persona->id;
-        $usuario->role ="estudiante";
+        $usuario->role = "estudiante";
         $usuario->save();
         $usuario->assignRole('estudiante');
         $this->limpiarForm();
@@ -170,7 +188,8 @@ class MatriculaController extends Component
 
     }
 
-    public function savedocente(){
+    public function savedocente()
+    {
         $persona = new Persona();
         $persona->dni = $this->dni;
         $persona->nombres = $this->nombes;
@@ -191,9 +210,44 @@ class MatriculaController extends Component
         $usuario->email = $this->dni;
         $usuario->password = bcrypt($this->dni);
         $usuario->personas_id = $persona->id;
-        $usuario->role ="docente"; //'estudiante';
+        $usuario->role = "docente"; //'estudiante';
         $usuario->save();
         $usuario->assignRole('docente');
         $this->limpiarForm();
+    }
+
+    public function uploadcertificates()
+    {
+        $nombrecurso = Publicacion::findOrFail($this->publicacion_id)->curso->nombre;
+        $directoryname = $nombrecurso . "_" . $this->publicacion_id;
+        foreach ($this->certificados as $certificado) {
+            $filename = date("dmYhis") . "-" . $certificado->getClientOriginalName();
+            $directory = $certificado->storeAS('public/' . $directoryname . '/certificados', $filename);
+            $url = Storage::url($directory);
+
+            Certificado::create([
+                'ruta' => $url,
+                'matricula_id' =>  $this->matriculadoid
+            ]);   
+        }
+        $msj = [
+            'modo' => 'bg-success',
+            'mensaje' => 'Se Cargaron los certificados de forma exitosa'
+        ];
+        $this->listcertificados = Certificado::where("matricula_id", $this->matriculadoid)->get();
+        $this->reset(['certificados']);
+        $this->emit('notify', $msj);
+    }
+    public function deletecertificate($id)
+    {
+        $ruta=str_replace('storage','public',Certificado::where('id',$id)->value('ruta'));
+        Storage::delete($ruta);
+        Certificado::destroy($id);
+        $msj = [
+            'modo' => 'bg-success',
+            'mensaje' => 'Se quito el certificado del Sistema'
+        ];
+        $this->listcertificados = Certificado::where("matricula_id", $this->matriculadoid)->get();
+        $this->emit('notify', $msj);
     }
 }
