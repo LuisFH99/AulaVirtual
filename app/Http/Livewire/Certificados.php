@@ -10,46 +10,42 @@ use Livewire\Component;
 
 class Certificados extends Component{
 
-    public $persona_id, $ruta,$matricula_id,$curso_id;
+    public $persona_id,$curso_id;
     public $cursos;
     public function render(){
+        
+        //retornando matriculas del estudiante
+        if ($this->curso_id == 0) {
+            $matricula = Matricula::where('estudiantes_id',$this->getEstudiante())->first();            
 
-        $this->persona_id = auth()->user()->personas->id; 
-        $estudiante = Estudiante::find($this->persona_id);
+        }else{
+            $matricula = Matricula::where('estudiantes_id',$this->getEstudiante())->where('publicacion_id',$this->getPublicacion())->first();            
+        }
+        
+        //retornando lista de cursos
+        $this->cursos = Matricula::where('estudiantes_id',$this->getEstudiante())->get();
+        
+        return view('livewire.certificados', compact('matricula'));
+    }
+
+    public function getEstudiante(){
+        //retornando id del estudiante
+        $this->persona_id = auth()->user()->personas_id; 
+        $estudiante = Estudiante::firstWhere('persona_id',$this->persona_id);
         $estudiante_id = $estudiante->id;
 
-        $matricula = Matricula::firstWhere('estudiantes_id',$estudiante_id);
+        return $estudiante_id;
+    }
 
-        // $id_matricula = Certificado::firstWhere('matricula_id',);
-        $id_matricula = $matricula->id;
-        // $id_publicacion = $matricula->publicacion_id;
-        $this->cursos = Matricula::where('id',$id_matricula)->get();
-        // $certificado = Certificado::firstWhere('matricula_id',$id_matricula);
-        $certificado = Certificado::where('matricula_id',$id_matricula)->get();
-        // $this->ruta  = $certificado->ruta;
-        // $publicacion = Publicacion::find($id_publicacion);
-        // $this->ruta=$matricula->certificados->ruta;
-        
-        return view('livewire.certificados', compact('matricula','certificado'));
+    public function getPublicacion(){
+        //retornando id de la publicacion
+        $publicacion = Publicacion::firstWhere('cursos_id',$this->curso_id);
+        $publicacion_id = $publicacion->id;
+
+        return $publicacion_id;
     }
 
 
-    public function descargar($id){
-        
-    }
-
-    public function ver($id){
-        $this->limpiar();
-        $matricula = Matricula::firstWhere('publicacion_id',$id);
-        $id_matricula = $matricula->id;
-        
-        $certificado = Certificado::firstWhere('matricula_id',$id_matricula);
-        $this->ruta  = $certificado->ruta;
-    }
-
-    public function limpiar(){
-        $this->ruta='';
-    }
 }
 
 
