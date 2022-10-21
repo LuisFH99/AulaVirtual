@@ -11,7 +11,8 @@ class Matricula extends Model
     protected $table = 'matricula';
     protected $fillable = [
         'estudiantes_id',
-        'publicacion_id'
+        'publicacion_id',
+        'response'
     ];
     public $timestamps = false;
 

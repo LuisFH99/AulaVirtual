@@ -1,10 +1,15 @@
 <div class="mx-4 row">
     <div class="col-md-6 p-3">
-        @if ($curso_id > 0)
-            @foreach ($matricula->certificados as $c)
-                <iframe src="{{ asset($c->ruta) }}" width="100%" height="500px" class="mb-1"></iframe>
-                <hr>
-            @endforeach
+        
+        @if ($curso_id > 0 && $matricula->response == 0)
+            
+            <div class="border"  style="display:flex; flex-direction: column; height: 600px;">
+                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScr0TpjacE0oiVJic8mIH_5765Z5GY9x-kmSs1qFb2MhHDTag/viewform?embedded=true" width="100%" height="100%" frameborder="0" marginheight="0" marginwidth="0">Cargando…</iframe>
+                
+            </div>
+            <div class="card">
+                <button class="btn btn-success" wire:click="validar({{$matricula->id}})"><i class="fa-regular fa-floppy-disk" style="color: white; font-size: 20px"></i> Complete la encuesta</button>
+            </div>
         @else
             <div class="mb-4">
                 <small class="fw-bold">Perfil > Vista Previa del Certificado <span class="text-danger">*Seleccionar Curso</span></small>
