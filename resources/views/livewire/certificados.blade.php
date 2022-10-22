@@ -30,7 +30,7 @@
         </div>
         <div class="card p-4">
             @if ($curso_id > 0)
-                @if ($matricula->count())
+                @if ($matricula->certificados->count())
                     <h4 class="text-dark fw-bold d-flex justify-content-center mb-3">¡Muchas felicidades!🎉🎉🎉</h4>
                     <small class="mb-2 fw-bold text-muted d-flex justify-content-center">Ahora podras descargar todos los certificados del curso y compartir tus logros.</small>
                     <hr class="mb-4">
