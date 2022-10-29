@@ -14,7 +14,7 @@ use Livewire\WithPagination;
 class PublicacionesController extends Component{
     use WithFileUploads;
     use WithPagination; 
-    public $id_publicacion,$rutaimg, $nota_minima, $fecha_inicio, $fecha_fin, $fecha_inicio_matricula, $fecha_fin_matricula, $horas, $cursos_id, $niveles_id, $tipopublicacion_id;
+    public $id_publicacion,$rutaimg, $nota_minima, $fecha_inicio, $fecha_fin, $fecha_inicio_matricula, $fecha_fin_matricula, $horas, $cursos_id, $niveles_id, $tipopublicacion_id,$rutaImg;
     Public $cursos,$niveles,$tipos;
     protected $listeners=['deleteRow' => 'delete'];
     protected $paginationTheme = 'bootstrap';
@@ -72,7 +72,7 @@ class PublicacionesController extends Component{
 
         $conv=Publicacion::updateorCreate(['id' => $this->id_publicacion],
         [
-        'rutaimg' =>$this->rutaimg,
+        'rutaimg' =>$this->Rutaimg($this->rutaimg),
         'nota_minima'=>$this->nota_minima,
         'fecha_inicio'=>$this->fecha_inicio,
         'fecha_fin'=>$this->fecha_fin,
@@ -89,24 +89,31 @@ class PublicacionesController extends Component{
         if ($this->id_publicacion>0) {
             //modificar imagen
             if ($this->rutaimg) { 
-                $filename= uniqid() . '_.' .$this->rutaimg->extension();
-                $this->rutaimg->storeAs('public/img',$filename);
-                $basesname=$conv->rutaimg;
-                $conv->rutaimg=$filename;
+                //encriptando nombre de la imagen
+                $nombreImg = uniqid() . '_.' .$this->rutaimg->extension();
+                //guardando imagen
+                $this->rutaimg->storeAs('public/img',$nombreImg);
+
+                //guardando ruta
+                $rutaimg=$conv->rutaimg; 
+                $conv->rutaimg=$this->Rutaimg($nombreImg);
                 $conv->save();
-                if ($basesname !=null) {
-                    if (file_exists('storage/img'.$basesname)) {
-                        unlink('storage/img'.$basesname);}
+
+                if ($rutaimg !=null) {
+                    if (file_exists('storage/img'.$rutaimg)) {
+                        unlink('storage/img'.$rutaimg);}
                 }
             }
         } else {
             if ($this->rutaimg) {
                 $filename = uniqid() . '_.' .$this->rutaimg->extension();
                 $this->rutaimg->storeAs('public/img',$filename);
-                $conv->rutaimg = $filename;
+                $conv->rutaimg = $this->Rutaimg($filename);
                 $conv->save();
             }
         }
+
+        //creacion de alertas
         
         if ($this->id_publicacion > 0) {
             $msj = [
@@ -181,5 +188,10 @@ class PublicacionesController extends Component{
     public function modulos($id){
         session(['idpublicacion' => $id]);
         return redirect()->route('admin.modulos.index');
+    }
+
+    public function Rutaimg($name){
+        $this->rutaImg = '/storage/img/'.$name;
+        return $this->rutaImg;
     }
 }
