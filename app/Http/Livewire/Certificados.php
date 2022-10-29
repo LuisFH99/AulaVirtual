@@ -45,6 +45,11 @@ class Certificados extends Component{
         return $publicacion_id;
     }
 
+    public function validar($id){
+        Matricula::where('id',$id)->update(['response'=>1]); 
+        #dd($matricula);
+    }
+
 
 }
 

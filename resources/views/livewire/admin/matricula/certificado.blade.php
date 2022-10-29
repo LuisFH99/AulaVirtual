@@ -14,7 +14,7 @@
 
                 <div class="container row  ">
                     <div class="col-9 border-right border-success">
-                        <label class="form-label">Subir lista matricula: (Tamaño maximo 3MB) <strong
+                        <label class="form-label">Subir certificados: (Tamaño maximo 3MB) <strong
                                 style="color: red">*</strong></label>
                         <input type="file" class="form-control-file" id="uploadedfile" wire:model="certificados"
                             ccept="application/pdf" multiple>
