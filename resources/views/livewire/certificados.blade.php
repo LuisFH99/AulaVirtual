@@ -34,7 +34,7 @@
                     <h4 class="text-dark fw-bold d-flex justify-content-center mb-3">¡Muchas felicidades!🎉🎉🎉</h4>
                     <small class="mb-2 fw-bold text-muted d-flex justify-content-center">Ahora podras descargar todos los certificados del curso y compartir tus logros.</small>
                     <hr class="mb-4">
-                    <div class="row">
+                    <div class="row"> 
                         @php $cont=1 @endphp
                         @foreach ($matricula->certificados as $c)
                             <div class="mb-4">

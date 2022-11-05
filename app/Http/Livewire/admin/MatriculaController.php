@@ -43,7 +43,7 @@ class MatriculaController extends Component
     {
 
         $this->listcertificados = Certificado::where("matricula_id", $id)->get();
-        $this->nombre=Matricula::findOrFail($id)->estudiante->datos->fullname();
+        $this->nombre = Matricula::findOrFail($id)->estudiante->datos->fullname();
         $this->matriculadoid = $id;
         $this->modalcertificado = true;
     }
@@ -56,42 +56,75 @@ class MatriculaController extends Component
 
     public function limpiarForm()
     {
-        $this->reset(['apellidos', 'nombes', 'dni', 'correo', 'celular', 'fecha_naciemiento', 'profesion','certificados']);
+        $this->reset(['apellidos', 'nombes', 'dni', 'correo', 'celular', 'fecha_naciemiento', 'profesion', 'certificados']);
     }
 
     public function registrar()
     {
-        // dd($this->apellidos,$this->nombes,$this->dni,$this->correo,$this->celular,$this->fecha_naciemiento,$this->profesion);
-        $persona = new Persona();
-        $persona->dni = $this->dni;
-        $persona->nombres = $this->nombes;
-        $persona->apellidos = $this->apellidos;
-        $persona->correo = $this->correo;
-        $persona->fechNac = $this->fecha_naciemiento;
-        $persona->celular = $this->celular;
-        $persona->save();
 
-        $estudiante = new Estudiante();
-        $estudiante->persona_id = $persona->id;
-        $estudiante->profesion = $this->profesion;
-        $estudiante->save();
+        $persona = Persona::where('dni', $this->dni)->first();
+        if (is_null($persona)) {
+            $persona = new Persona();
+            $persona->dni = $this->dni;
+            $persona->nombres = $this->nombes;
+            $persona->apellidos = $this->apellidos;
+            $persona->correo = $this->correo;
+            $persona->fechNac = $this->fecha_naciemiento;
+            $persona->celular = $this->celular;
+            $persona->save();
 
-        $matricular = new Matricula();
-        $matricular->estudiantes_id = $estudiante->id;
-        $matricular->publicacion_id = $this->publicacion_id;
-        $matricular->save();
+            $estudiante = new Estudiante();
+            $estudiante->persona_id = $persona->id;
+            $estudiante->profesion = $this->profesion;
+            $estudiante->save();
 
-        $usuario = new User();
-        $usuario->name = $persona->fullName();
-        $usuario->email = $this->dni;
-        $usuario->password = bcrypt($this->dni);
-        $usuario->personas_id = $persona->id;
-        $usuario->role = "estudiante";
-        $usuario->save();
-        $usuario->assignRole('estudiante');
+            $matricular = new Matricula();
+            $matricular->estudiantes_id = $estudiante->id;
+            $matricular->publicacion_id = $this->publicacion_id;
+            $matricular->save();
+
+            $usuario = new User();
+            $usuario->name = $persona->fullName();
+            $usuario->email = $this->dni;
+            $usuario->password = bcrypt($this->dni);
+            $usuario->personas_id = $persona->id;
+            $usuario->role = "estudiante";
+            $usuario->save();
+            $usuario->assignRole('estudiante');
+            
+        } else {
+
+            $persona->dni = $this->dni;
+            $persona->nombres = $this->nombes;
+            $persona->apellidos = $this->apellidos;
+            $persona->correo = $this->correo;
+            $persona->fechNac = $this->fecha_naciemiento;
+            $persona->celular = $this->celular;
+            $persona->save();
+
+            $estudiante = Estudiante::where('persona_id', $persona->id)->first();
+            $estudiante->profesion = $this->profesion;
+            $estudiante->save();
+
+            $matricular = new Matricula();
+            $matricular->estudiantes_id = $estudiante->id;
+            $matricular->publicacion_id = $this->publicacion_id;
+            $matricular->save();
+
+            $usuario = User::where('personas_id',$persona->id)->first();
+            $usuario->name = $persona->fullName();
+            $usuario->save();
+            
+
+        }
+        //$this->sendemail($persona->correo,$persona->fullName(),$persona->dni,$persona->dni);
         $this->limpiarForm();
+        
+    }
 
-        $destinatario = $persona->correo; // "huaraz14@gmail.com"; 
+    public function sendemail($email_destino, $nombres, $usuario, $clave)
+    {
+        $destinatario = $email_destino;
         $asunto = "Registro en Aula Virtual de la FUNDASAM";
         $cuerpo = '<!DOCTYPE html>
                 <html>
@@ -133,15 +166,24 @@ class MatriculaController extends Component
                 <body>
                 <div class="modal-content animate">
                 <div class="imgcontainer">      
-                <img src="https://fyhglobal.com/aulavirtual/img/fundasam.webp" alt="Avatar" class="avatar">
+                <img src="https://fundasam.com/aulavirtual/img/fundasam-logo.png" alt="Avatar" class="avatar">
                 </div>
                 <div class="container" style="background-color:#2d529f">
                 <center> <font style="color: #FFFFFF">ENTREGA DE CREDENCIALES DE ACCESO</font> </center>
                 </div>
                 <p style="padding:10px 15px">
-                "Estimado ' . $persona->fullName() . ' Ha sido registrado en el Aula Virtual de la FUNDASAM con los siguientes datos:"
+                "Estimado ' . $nombres . ' Ha sido registrado en el Aula Virtual de la FUNDASAM con los siguientes datos:"
                 </p>
                 <div class="container">
+                <label for="uname"><b>ENLACE URL</b></label>
+                <input 
+                style="width: 100%;
+                padding: 12px 20px;
+                margin: 8px 0;
+                display: inline-block;
+                border: 1px solid #ccc;
+                box-sizing: border-box;"
+                type="text" value="' . env('APP_URL') . '" name="url" disabled>
                 <label for="uname"><b>APELLIDOS Y NOMBRES</b></label>
                 <input 
                 style="width: 100%;
@@ -150,7 +192,7 @@ class MatriculaController extends Component
                 display: inline-block;
                 border: 1px solid #ccc;
                 box-sizing: border-box;"
-                type="text" value="' . $persona->fullName() . '" name="uname" disabled>
+                type="text" value="' . $nombres . '" name="uname" disabled>
                 <label for="psw"><b>USUARIO</b></label>
                 <input
                 style="width: 100%;
@@ -159,7 +201,7 @@ class MatriculaController extends Component
                 display: inline-block;
                 border: 1px solid #ccc;
                 box-sizing: border-box;"
-                type="text" value="' . $persona->dni . '" name="uname" disabled>
+                type="text" value="' . $usuario . '" name="uname" disabled>
                 <label for="psw"><b>CONTRASEÑA</b></label>     
                 <input
                 style="width: 100%;
@@ -168,7 +210,7 @@ class MatriculaController extends Component
                 display: inline-block;
                 border: 1px solid #ccc;
                 box-sizing: border-box;"
-                type="text" value="' . $persona->dni . '" disabled>        </div>
+                type="text" value="' . $clave . '" disabled>        </div>
                 <div class="container" style="background-color:#2d529f">
                 <center> <font style="color: #FFFFFF">FUNDASAM </font> </center>
                 </div>
@@ -183,9 +225,6 @@ class MatriculaController extends Component
         $headers .= "From: Administración FUNDASAM<lfactorh99@gmail.com>\r\n";
 
         mail($destinatario, $asunto, $cuerpo, $headers);
-
-        // $persona->image=$this->profesion;        
-
     }
 
     public function savedocente()
@@ -228,7 +267,7 @@ class MatriculaController extends Component
             Certificado::create([
                 'ruta' => $url,
                 'matricula_id' =>  $this->matriculadoid
-            ]);   
+            ]);
         }
         $msj = [
             'modo' => 'bg-success',
@@ -240,7 +279,7 @@ class MatriculaController extends Component
     }
     public function deletecertificate($id)
     {
-        $ruta=str_replace('storage','public',Certificado::where('id',$id)->value('ruta'));
+        $ruta = str_replace('storage', 'public', Certificado::where('id', $id)->value('ruta'));
         Storage::delete($ruta);
         Certificado::destroy($id);
         $msj = [
