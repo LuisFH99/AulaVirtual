@@ -94,7 +94,6 @@
                                 @error('peso')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
-                                {{-- <input type="text" class="form-input" name="peso" id="peso" wire:model="peso"> --}}
                             </div>
 
                         </div>
@@ -102,10 +101,9 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primario" wire:click="guardarExamen"><i
-                            class="fa-solid fa-paper-plane" style="font-size: 20px"></i>&nbsp;Generar Examen</button>
-                    <button type="button" class="btn btn-cancel" wire:click="cancelar"><i class="fa-solid fa-ban"
-                            style="font-size: 20px"></i>&nbsp;Cancelar</button>
+                    <button type="button" class="btn btn-primario" wire:click="cancelar" style="visibility: hidden">&nbsp;Generar Examen</button>
+                    <button type="button" class="btn btn-primario" wire:click="guardarExamen">&nbsp;Generar Examen</button>
+                    <button type="button" class="btn btn-cancel" wire:click="cancelar">&nbsp;Cancelar</button>
                 </div>
             @elseif ($formforo)
                 <div class="modal-header">

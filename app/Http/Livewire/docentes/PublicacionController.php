@@ -221,9 +221,9 @@ class PublicacionController extends Component
         $this->cancelar();
     }
 
-    public function guardarExamen()
-    {
+    public function guardarExamen(){
         $this->validate($this->rulesExamen, $this->msjError);
+
         $test = new Examen();
         $test->tiempo = $this->duracion;
         $test->peso = $this->peso;
@@ -232,15 +232,19 @@ class PublicacionController extends Component
         $test->modulo_id = (is_null($this->moduloid) ? null : $this->moduloid);
         $test->is_visible = 0;
         $test->save();
+
         $datos2 = [
             'modo' => 'warning',
             'mensaje' => 'Ingrese al Examen para Agregar Preguntas'
         ];
+
         $this->emit('alertaSistema', $datos2);
+        
         $datos = [
             'modo' => 'success',
             'mensaje' => 'Se Genero Nuevo Examen'
         ];
+
         $this->emit('alertaSistema', $datos);
         $this->cancelar();
     }
